@@ -1,7 +1,7 @@
 {
-    "parent": "builtin/generated",
+    "parent": "expotions:builtin/generated",
     "textures": {
-        "layer0": "items/potion_explosion"
+        "layer0": "expotions:items/potion_explosive"
     },
     "display": {
         "thirdperson": {
