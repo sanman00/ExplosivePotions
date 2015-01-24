@@ -6,6 +6,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 /**
@@ -23,9 +25,18 @@ public class ItemExplosivePotion extends Item {
     public boolean showDurabilityBar(ItemStack stack) {
         return false;
     }
+    
     @Override
     public EnumAction getItemUseAction(ItemStack stack) {
         return EnumAction.DRINK;
+    }
+
+    @Override
+    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!worldIn.isRemote) {
+            worldIn.createExplosion(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ, 2.0f, false);
+        }
+        return true;
     }
     
     @Override
@@ -37,10 +48,7 @@ public class ItemExplosivePotion extends Item {
         }
 
         System.out.println("line 39");
-        if (!worldIn.isRemote) {
-            System.out.println("line 41");
-            worldIn.createExplosion(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ, 2.0f, false);
-        }
+        
 
         //playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
 
