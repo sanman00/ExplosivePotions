@@ -13,7 +13,9 @@ public class Main {
     public static final String MOD_ID = "expotions";
     public static final String VERSION = "0.0.5";
     public static final String NAME = "Explosive Potions";
-    @SidedProxy(clientSide="com.comze.sanman00.mods.minecraft.expotions.proxy.ClientProxy", serverSide="com.comze.sanman00.mods.minecraft.expotions.proxy.ServerProxy", modId = MOD_ID)
+    @SidedProxy(clientSide = "com.comze.sanman00.mods.minecraft.expotions.proxy.ClientProxy", 
+                serverSide = "com.comze.sanman00.mods.minecraft.expotions.proxy.ServerProxy", 
+                modId = MOD_ID)
     public static BaseProxy proxy;
     private static Logger logger;
     
