@@ -1,0 +1,13 @@
+[
+    {
+        "modid": "expotions",
+        "name": "Explosive Potions",
+        "description": "A mod that adds an explosive potion that explodes when you drink it!",
+        "version": "${version}",
+        "mcversion": "1.8",
+        "authorList": ["sanman00"],
+        "credits": "",
+        "logoFile": ""
+    }
+]
+
