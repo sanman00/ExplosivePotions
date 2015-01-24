@@ -8,6 +8,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+/**
+ * The actual exploding potion item.
+ * @author sanman00
+ */
 public class ItemExplosivePotion extends Item {
     public ItemExplosivePotion() {
         this.setUnlocalizedName("potionExplosion").setMaxStackSize(3).setCreativeTab(CreativeTabs.tabBrewing).setPotionEffect("explosion");

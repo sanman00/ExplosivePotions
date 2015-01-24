@@ -3,6 +3,10 @@ package com.comze.sanman00.mods.minecraft.expotions.util;
 import java.util.Arrays;
 import sun.reflect.Reflection;
 
+/**
+ * The singleton version of <code>java.lang.StringBuilder</code>. Do not use!
+ * @author sanman00
+ */
 public final class ImmutableStringBuilder {
     private static String buffer = "";
 
