@@ -16,8 +16,9 @@ public abstract class BaseProxy {
      */
     public void preInit(FMLPreInitializationEvent event) {
         String mcVersion = Minecraft.getMinecraft().getVersion();
-        if (!(mcVersion != null && mcVersion.equals("1.8"))) {
-            event.getModLog().warn("This mod is designed for Minecraft 1.8, not \"" + mcVersion + "\"!");
+        if (!(mcVersion != null && mcVersion.equals("1.8-Forge11.14.0.1290-1.8"))) {
+            event.getModLog().warn("This mod is designed for Minecraft Forge 11.14.1290 for Minecraft 1.8.\n"
+                                 + "Your version: \"" + mcVersion + "\"");
         }
     }
     /**

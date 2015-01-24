@@ -24,7 +24,7 @@ public class ClientProxy extends BaseProxy {
     public void init(FMLInitializationEvent event) {
         super.init(event);
         Main.getLogger().info("Starting client-side init of Explosive Potions mod version " + Main.VERSION);
-        GameRegistry.addShapedRecipe(new ItemStack(new ItemExplosivePotion()), "G", "B", 'B', new ItemStack(Items.potionitem), 'G', new ItemStack(Items.gunpowder));
+        GameRegistry.addShapelessRecipe(new ItemStack(new ItemExplosivePotion()), new ItemStack(Items.potionitem), new ItemStack(Items.gunpowder));
     }
     
     @Override

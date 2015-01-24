@@ -14,9 +14,13 @@ import net.minecraft.world.World;
  */
 public class ItemExplosivePotion extends Item {
     public ItemExplosivePotion() {
-        this.setUnlocalizedName("potionExplosion").setMaxStackSize(3).setCreativeTab(CreativeTabs.tabBrewing).setPotionEffect("explosion");
+        this.setUnlocalizedName("potionExplosion").setMaxStackSize(3).setCreativeTab(CreativeTabs.tabBrewing);
     }
     
+    @Override
+    public boolean showDurabilityBar(ItemStack stack) {
+        return false;
+    }
     @Override
     public EnumAction getItemUseAction(ItemStack stack) {
         return EnumAction.DRINK;
@@ -43,5 +47,10 @@ public class ItemExplosivePotion extends Item {
         }
 
         return stack;
+    }
+    
+    @Override
+    public boolean hasEffect(ItemStack stack) {
+        return true;
     }
 }
