@@ -44,9 +44,6 @@ public class ItemExplosivePotion extends Item {
     
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
-            worldIn.createExplosion(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ, 2.0f, false);
-        }
         return true;
     }
     
@@ -64,6 +61,9 @@ public class ItemExplosivePotion extends Item {
             playerIn.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
         }
 
+        if (!worldIn.isRemote) {
+            worldIn.createExplosion(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ, 2.0f, false);
+        }
         return stack;
     }
     
