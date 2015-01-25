@@ -17,8 +17,8 @@ import net.minecraft.world.World;
 public class ItemExplosivePotion extends Item {
     public static final Item instance = new ItemExplosivePotion();
     
-    public ItemExplosivePotion() {
-        this.setUnlocalizedName("potionExplosion").setMaxStackSize(3).setCreativeTab(CreativeTabs.tabBrewing);
+    private ItemExplosivePotion() {
+        this.setUnlocalizedName("potion_explosive").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabBrewing);
     }
     
     @Override
@@ -32,6 +32,17 @@ public class ItemExplosivePotion extends Item {
     }
 
     @Override
+    public int getMaxItemUseDuration(ItemStack stack) {
+        return 32;
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+        return stack;
+    }
+    
+    @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             worldIn.createExplosion(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ, 2.0f, false);
@@ -41,30 +52,18 @@ public class ItemExplosivePotion extends Item {
     
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-        System.out.println("line 33");
         if (!playerIn.capabilities.isCreativeMode) {
-            System.out.println("line 35");
             --stack.stackSize;
         }
 
-        System.out.println("line 39");
-        
-
-        //playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
-
-        System.out.println("line 47");
         if (!playerIn.capabilities.isCreativeMode) {
-            System.out.println("line 49");
             if (stack.stackSize <= 0) {
-                System.out.println("line 51");
                 return new ItemStack(Items.glass_bottle);
             }
 
-            System.out.println("line 53");
             playerIn.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
         }
 
-        System.out.println("line 59");
         return stack;
     }
     
