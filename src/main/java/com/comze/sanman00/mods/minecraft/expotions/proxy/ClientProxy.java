@@ -19,7 +19,6 @@ public class ClientProxy extends BaseProxy {
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
         Main.getLogger().info("Starting client-side pre-init of Explosive Potions mod version " + Main.VERSION);
-        System.out.println("Registering item...");
         GameRegistry.registerItem(ItemExplosivePotion.instance, "potion_explosive");
     }
     
@@ -27,10 +26,7 @@ public class ClientProxy extends BaseProxy {
     public void init(FMLInitializationEvent event) {
         super.init(event);
         Main.getLogger().info("Starting client-side init of Explosive Potions mod version " + Main.VERSION);
-        System.out.println("Creating resource location instance...");
-        System.out.println("Registering location...");
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(ItemExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_explosive", "inventory"));
-        System.out.println("Adding shapeless recipe...");
         GameRegistry.addShapelessRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Items.glass_bottle), new ItemStack(Items.gunpowder));
     }
     
