@@ -4,7 +4,7 @@ A mod for Minecraft that adds a potions that explodes when you drink it. This mo
 
 TODO:
 - ~~Add texture/model to potion~~ Fixed as of 0.0.6_10
-- Make potion drinkable (appears to not work right now)
+- ~~Make potion drinkable (appears to not work right now)~~ Fixed as of 0.0.7
 
 # How to install
 
