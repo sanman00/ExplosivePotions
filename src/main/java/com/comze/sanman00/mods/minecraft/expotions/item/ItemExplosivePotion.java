@@ -6,12 +6,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 /**
- * The actual exploding potion item.
+ * The exploding potion item.
  * @author sanman00
  */
 public class ItemExplosivePotion extends Item {
@@ -40,11 +38,6 @@ public class ItemExplosivePotion extends Item {
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
         return stack;
-    }
-    
-    @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-        return true;
     }
     
     @Override
