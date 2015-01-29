@@ -1,6 +1,6 @@
 package com.comze.sanman00.mods.minecraft.expotions.item;
 
-import net.minecraft.creativetab.CreativeTabs;
+import com.comze.sanman00.mods.minecraft.expotions.tabs.SanmanCreativeTab;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
@@ -10,20 +10,21 @@ import net.minecraft.world.World;
 
 /**
  * The exploding potion item.
+ *
  * @author sanman00
  */
 public class ItemExplosivePotion extends Item {
     public static final Item instance = new ItemExplosivePotion();
-    
+
     private ItemExplosivePotion() {
-        this.setUnlocalizedName("potion_explosive").setMaxStackSize(1).setCreativeTab(CreativeTabs.tabBrewing);
+        this.setUnlocalizedName("potion_explosive").setMaxStackSize(1).setCreativeTab(new SanmanCreativeTab());
     }
-    
+
     @Override
     public boolean showDurabilityBar(ItemStack stack) {
         return false;
     }
-    
+
     @Override
     public EnumAction getItemUseAction(ItemStack stack) {
         return EnumAction.DRINK;
@@ -36,30 +37,29 @@ public class ItemExplosivePotion extends Item {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+        player.setItemInUse(stack, getMaxItemUseDuration(stack));
         return stack;
     }
-    
-    @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-        if (!playerIn.capabilities.isCreativeMode) {
-            --stack.stackSize;
-        }
 
-        if (!playerIn.capabilities.isCreativeMode) {
+    @Override
+    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
+        if (!player.capabilities.isCreativeMode) {
+            --stack.stackSize;
+
             if (stack.stackSize <= 0) {
                 return new ItemStack(Items.glass_bottle);
             }
 
-            playerIn.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
+            player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
+            world.newExplosion(null, player.posX, player.posY, player.posZ, 2.0f, true, true);
         }
 
-        if (!worldIn.isRemote) {
-            worldIn.createExplosion(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ, 2.0f, false);
+        if (!world.isRemote) {
+            world.newExplosion(null, player.posX, player.posY, player.posZ, 2.0f, true, true);
         }
         return stack;
     }
-    
+
     @Override
     public boolean hasEffect(ItemStack stack) {
         return true;
