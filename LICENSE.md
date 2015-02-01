@@ -1,4 +1,4 @@
-This Minecraft mod's source code ("the code") is ©2015 sanman00 ("the author") all rights reserved, and is licensed for use and redistribution under a modification of the “Don’t Be a Jerk” non-commercial care-free licence.
+This Minecraft mod's source code ("code") is copyright 2015 sanman00 licensed for use and redistribution under the "Minecraft Development Licence", a modification of the “Don’t Be a Jerk” non-commercial care-free licence.
 
 ###Scope
 This means that you’re free to pretty much do what you like with the the code (source) or compiled binaries (jar/zip/class files), including but not limited to:
@@ -15,7 +15,7 @@ This means that you’re free to pretty much do what you like with the the code 
 * Use portions of the code as examples in a presentation
 * Record portions of gameplay for display on YouTube or other video/media sites
 
-The above usage is granted to you as long as this license remains intact for all original or derived code. Please include a copy of this license with the code, or provide a link to this document, just to make sure everyone's as cool as you.
+The above usage is granted to you as long as this license remains intact for all original or derived code. Please include a copy of this license with the code, or provide a link to this document.
 
 ###Ownership
 This licence specifically prohibits you from claiming the the code or compiled binaries are your own without permission from me. 
@@ -27,17 +27,13 @@ This license specifically prohibits you from using AdF.ly or AdF.ly clones (any 
 
 Specific exceptions to the non-commercial nature of this license are granted to any derivative works of art. Here's some specific exemptions:
 * If you make a nice t-shirt design based off the code and want to sell that, that's fine.
-* Want to use the the code or compiled binaries as part of a charity event? Go ahead.
-* Make money from Let's Play videos or other "commentary" type uses, eg reviews or how-to videos/tutorials? No problem.
+* Want to use the the code or compiled binaries as part of a charity event? Sure thing.
+* Make money from Let's Play videos or other "commentary" type uses, e.g. reviews or how-to videos/tutorials? No problem.
 
-Ultimately, your work is your own. This license is designed to protect against douches trying to make money off someone else's work. Any exemptions not listed here require permission from me.
+Ultimately, your work is your own. This license is designed to protect against people trying to make money off my work. Any exemptions not listed here require permission from me.
 
 ###Damages
 This license prohibits any attempt to hold the author liable for damages caused by usage of the the code or compiled binaries. Bugs happen, so make backups, and don't complain if your world gets corrupted. Seriously, make backups.
 
 ###Reserved Rights
-I reserve the right to change this license at any time (not I really will make many changes).
-
-Conclusion
-====
-Ultimately, don't be an idiot, play nice, be polite, and you'll be fine.
+I reserve the right to change this license at any time (not that I really will make many changes).
