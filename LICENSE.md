@@ -1,4 +1,4 @@
-This source code ("the code") is ©2015 sanman00 ("the author") all rights reserved, and is licensed for use and redistribution under a modification of the “Don’t Be a Jerk” non-commercial care-free licence.
+This Minecraft mod's source code ("the code") is ©2015 sanman00 ("the author") all rights reserved, and is licensed for use and redistribution under a modification of the “Don’t Be a Jerk” non-commercial care-free licence.
 
 ###Scope
 This means that you’re free to pretty much do what you like with the the code (source) or compiled binaries (jar/zip/class files), including but not limited to:
@@ -7,21 +7,21 @@ This means that you’re free to pretty much do what you like with the the code 
 * Fork this repository
 * Compile the code
 * Modify the code to: 
-  * fix bugs 
-  * add features 
-  * fit better with your modpack
-  * remove a problematic item
-  * replace all item icons with cat pictures if you really wanted to (preferably not, though)
+  * Fix bugs 
+  * Add features 
+  * Fit better with your modpack
+  * Remove a problematic item
+  * Replace all item icons with cat pictures if you really wanted to (preferably not, though)
 * Use portions of the code as examples in a presentation
 * Record portions of gameplay for display on YouTube or other video/media sites
 
 The above usage is granted to you as long as this license remains intact for all original or derived code. Please include a copy of this license with the code, or provide a link to this document, just to make sure everyone's as cool as you.
 
 ###Ownership
-This licence specifically prohibits you from claiming the the code or compiled binaries are yours without permission from the previous author(s). 
+This licence specifically prohibits you from claiming the the code or compiled binaries are your own without permission from me. 
 
 ###Non-Commercial Status
-You are expressly prohibited from making or trying to make money from the code, derivatives of the code, compiled portions of the code, etc etc.
+You are expressly prohibited from making or trying to make money from the code, derivatives of the code, compiled portions of the code, etc.
 
 This license specifically prohibits you from using AdF.ly or AdF.ly clones (any "click past an ad before you can download" service) to make money or attempt to make money for clicks or downloads.
 
