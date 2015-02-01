@@ -6,6 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 /**
@@ -51,11 +52,15 @@ public class ItemExplosivePotion extends Item {
             }
 
             player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
-            world.newExplosion(null, player.posX, player.posY, player.posZ, 2.0f, true, true);
+            Explosion explosion = world.newExplosion(null, player.posX, player.posY, player.posZ, 5.0f, true, true);
+            explosion.doExplosionA();
+            explosion.doExplosionB(true);
         }
 
         if (!world.isRemote) {
-            world.newExplosion(null, player.posX, player.posY, player.posZ, 2.0f, true, true);
+            Explosion explosion = world.newExplosion(null, player.posX, player.posY, player.posZ, 2.0f, true, true);
+            explosion.doExplosionA();
+            explosion.doExplosionB(true);
         }
         return stack;
     }
