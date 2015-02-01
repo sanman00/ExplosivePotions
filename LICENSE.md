@@ -40,4 +40,4 @@ I reserve the right to change this license at any time (not I really will make m
 
 Conclusion
 ====
-Ultimately, don't be a f***er, play nice, be polite, and you'll be fine.
+Ultimately, don't be an idiot, play nice, be polite, and you'll be fine.
