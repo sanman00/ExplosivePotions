@@ -11,13 +11,15 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = Main.MOD_ID, version = Main.VERSION, name = Main.NAME)
 public class Main {
     public static final String MOD_ID = "expotions";
-    public static final String VERSION = "0.0.7_08";
+    public static final String VERSION = "0.0.8";
     public static final String NAME = "Explosive Potions";
     @SidedProxy(clientSide = "com.comze.sanman00.mods.minecraft.expotions.proxy.ClientProxy", 
                 serverSide = "com.comze.sanman00.mods.minecraft.expotions.proxy.ServerProxy", 
                 modId = MOD_ID)
     public static BaseProxy proxy;
     private static Logger logger;
+    @Mod.Instance
+    public static Main instance;
     
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -33,11 +35,6 @@ public class Main {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
-    }
-    
-    @Mod.InstanceFactory
-    public static Main instance() {
-        return new Main();
     }
     
     public static Logger getLogger() {

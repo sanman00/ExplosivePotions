@@ -10,18 +10,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ServerProxy extends BaseProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
-        //super.preInit(event);
-        //Main.getLogger().info("["+ Main.NAME + "]Starting server-side pre-init of Explosive Potions mod version " + Main.VERSION);
+        super.preInit(event);
     }
     
     @Override
     public void init(FMLInitializationEvent event) {
-        //super.init(event);
-        //Main.getLogger().info("["+ Main.NAME + "]Starting server-side init of Explosive Potions mod version " + Main.VERSION);
+        super.init(event);
+        
     }
     
     @Override
     public void postInit(FMLPostInitializationEvent event) {
-        //super.postInit(event);
+        super.postInit(event);
     }
 }
