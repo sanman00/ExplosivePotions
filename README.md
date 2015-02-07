@@ -1,6 +1,6 @@
 # Explosive Potions
 
-A mod for Minecraft that adds a potion that explodes when you drink it. This mod should be built with Minecraft Forge 11.14.1.1303 for Minecraft 1.8. This mod is licensed under the Minecraft Development License (look in LICENSE.md).
+A mod for Minecraft that adds a potion that explodes when you drink it. This mod should be built with Minecraft Forge 11.14.1.1303 for Minecraft 1.8. This mod is licensed under the Sanman Minecraft Development License (look in LICENSE.md).
 
 # How to install
 
