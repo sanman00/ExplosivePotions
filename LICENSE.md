@@ -1,4 +1,4 @@
-This Minecraft mod's source code ("code") is copyright 2015 sanman00 licensed for use and redistribution under the "Minecraft Development Licence", a modification of the “Don’t Be a Jerk” non-commercial care-free licence.
+This Minecraft mod's source code ("code") is copyright 2015 sanman00 licensed for use and redistribution under the "Sanman Minecraft Development Licence", a modification of the “Don’t Be a Jerk” non-commercial care-free licence.
 
 ###Scope
 This means that you’re free to pretty much do what you like with the the code (source) or compiled binaries (jar/zip/class files), including but not limited to:
