@@ -44,6 +44,10 @@ public class ItemExplosivePotion extends Item {
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
+        Explosion explosion = world.newExplosion(null, player.posX, player.posY, player.posZ, 5.0f, true, true);
+        explosion.doExplosionA();
+        explosion.doExplosionB(true);
+        
         if (!player.capabilities.isCreativeMode) {
             --stack.stackSize;
 
@@ -52,16 +56,9 @@ public class ItemExplosivePotion extends Item {
             }
 
             player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
-            Explosion explosion = world.newExplosion(null, player.posX, player.posY, player.posZ, 5.0f, true, true);
-            explosion.doExplosionA();
-            explosion.doExplosionB(true);
+            
         }
-
-        if (!world.isRemote) {
-            Explosion explosion = world.newExplosion(null, player.posX, player.posY, player.posZ, 2.0f, true, true);
-            explosion.doExplosionA();
-            explosion.doExplosionB(true);
-        }
+        
         return stack;
     }
 
