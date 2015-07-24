@@ -18,7 +18,7 @@ public class ItemExplosivePotion extends Item {
     public static final Item instance = new ItemExplosivePotion();
 
     private ItemExplosivePotion() {
-        this.setUnlocalizedName("potion_explosive").setMaxStackSize(1).setCreativeTab(new SanmanCreativeTab());
+        this.setUnlocalizedName("potion_explosive").setMaxStackSize(1).setCreativeTab(SanmanCreativeTab.instance);
     }
 
     @Override

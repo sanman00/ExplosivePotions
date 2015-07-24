@@ -8,7 +8,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class SanmanCreativeTab extends CreativeTabs {
-    public SanmanCreativeTab() {
+    public static final SanmanCreativeTab instance = new SanmanCreativeTab();
+
+	public SanmanCreativeTab() {
         super("explodingPotions");
     }
     
