@@ -6,7 +6,10 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class EntityExplosivePotion extends EntityThrowable {
 	public EntityExplosivePotion(World worldIn) {
 		super(worldIn);
@@ -24,8 +27,8 @@ public class EntityExplosivePotion extends EntityThrowable {
 	protected void onImpact(MovingObjectPosition pos) {
 		World world = super.worldObj;
 		
-		if (!world.isRemote) {
-			Explosion explosion = world.newExplosion(null, pos.getBlockPos().getX(), pos.getBlockPos().getY(), pos.getBlockPos().getZ(), 5.0f, true, true);
+		if (!world.isRemote && pos != null && pos.getBlockPos() != null) {
+			Explosion explosion = world.newExplosion(null, pos.getBlockPos().getX(), pos.getBlockPos().getY(), pos.getBlockPos().getZ(), 25.0f, true, true);
 			
 			explosion.doExplosionA();
 			explosion.doExplosionB(true);

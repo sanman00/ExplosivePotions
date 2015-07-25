@@ -1,1 +1,3 @@
 item.potion_explosive.name=Explosive Potion
+item.potion_throwable_explosive.name=Throwable Explosive Potion
+itemGroup.explodingPotions.name=Explosive Potions

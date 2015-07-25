@@ -1,6 +1,6 @@
 {
-    "parent": "expotions:builtin/generated",
-    "textures": {
+    "parent": "expotions:builtin/generated", 
+	"textures": {
         "layer0": "expotions:items/potion_throwable_explosive"
     },
     "display": {
