@@ -48,6 +48,7 @@ public class ClientProxy extends BaseProxy {
         super.postInit(event);
     }
     
+    //Fix for throwable potion not working
     @SubscribeEvent
     public void onPlayerInteract(PlayerInteractEvent e) {
     	if (e.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR || e.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
