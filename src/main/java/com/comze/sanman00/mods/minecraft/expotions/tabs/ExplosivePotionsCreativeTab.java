@@ -4,14 +4,14 @@ import com.comze.sanman00.mods.minecraft.expotions.item.ItemExplosivePotion;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class SanmanCreativeTab extends CreativeTabs {
-    public static final SanmanCreativeTab instance = new SanmanCreativeTab();
+public class ExplosivePotionsCreativeTab extends CreativeTabs {
+    public static final ExplosivePotionsCreativeTab instance = new ExplosivePotionsCreativeTab();
 
-	private SanmanCreativeTab() {
+	private ExplosivePotionsCreativeTab() {
         super("explodingPotions");
     }
     
-    private SanmanCreativeTab(int index) {
+    private ExplosivePotionsCreativeTab(int index) {
         super(index, "explodingPotions");
     }
     

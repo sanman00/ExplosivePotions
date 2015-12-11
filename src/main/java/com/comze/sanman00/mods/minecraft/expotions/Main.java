@@ -1,6 +1,6 @@
 package com.comze.sanman00.mods.minecraft.expotions;
 
-import com.comze.sanman00.mods.minecraft.expotions.proxy.BaseProxy;
+import com.comze.sanman00.mods.minecraft.expotions.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -11,12 +11,12 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = Main.MOD_ID, version = Main.VERSION, name = Main.NAME)
 public class Main {
     public static final String MOD_ID = "expotions";
-    public static final String VERSION = "0.0.8";
+    public static final String VERSION = "0.0.9_pre1";
     public static final String NAME = "Explosive Potions";
     @SidedProxy(clientSide = "com.comze.sanman00.mods.minecraft.expotions.proxy.ClientProxy", 
-                serverSide = "com.comze.sanman00.mods.minecraft.expotions.proxy.ServerProxy", 
+                serverSide = "com.comze.sanman00.mods.minecraft.expotions.proxy.CommonProxy", 
                 modId = MOD_ID)
-    public static BaseProxy proxy;
+    public static CommonProxy proxy;
     private static Logger logger;
     @Mod.Instance
     public static Main instance;

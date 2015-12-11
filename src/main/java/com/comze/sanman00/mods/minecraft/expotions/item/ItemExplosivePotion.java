@@ -1,6 +1,6 @@
 package com.comze.sanman00.mods.minecraft.expotions.item;
 
-import com.comze.sanman00.mods.minecraft.expotions.tabs.SanmanCreativeTab;
+import com.comze.sanman00.mods.minecraft.expotions.tabs.ExplosivePotionsCreativeTab;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
@@ -18,7 +18,7 @@ public class ItemExplosivePotion extends Item {
     public static final Item instance = new ItemExplosivePotion();
 
     private ItemExplosivePotion() {
-        this.setUnlocalizedName("potion_explosive").setMaxStackSize(1).setCreativeTab(SanmanCreativeTab.instance);
+        this.setUnlocalizedName("potion_explosive").setMaxStackSize(1).setCreativeTab(ExplosivePotionsCreativeTab.instance);
     }
 
     @Override
