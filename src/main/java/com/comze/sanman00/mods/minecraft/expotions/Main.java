@@ -8,11 +8,11 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Main.MOD_ID, version = Main.VERSION, name = Main.NAME)
+@Mod(modid = Main.MOD_ID, version = Main.MOD_VERSION, name = Main.MOD_NAME)
 public class Main {
     public static final String MOD_ID = "expotions";
-    public static final String VERSION = "0.0.9_pre1";
-    public static final String NAME = "Explosive Potions";
+    public static final String MOD_VERSION = "0.0.10";
+    public static final String MOD_NAME = "Explosive Potions";
     @SidedProxy(clientSide = "com.comze.sanman00.mods.minecraft.expotions.proxy.ClientProxy", 
                 serverSide = "com.comze.sanman00.mods.minecraft.expotions.proxy.CommonProxy", 
                 modId = MOD_ID)
