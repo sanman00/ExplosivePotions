@@ -11,8 +11,8 @@ public class EntityExplosivePotion extends EntityThrowable {
 		super(worldIn);
 	}
 
-	public EntityExplosivePotion(World world, double x, double y, double p_i1778_6_) {
-		super(world, x, y, p_i1778_6_);
+	public EntityExplosivePotion(World world, double x, double y, double z) {
+		super(world, x, y, z);
 	}
 
 	public EntityExplosivePotion(World world, EntityLivingBase thrower) {

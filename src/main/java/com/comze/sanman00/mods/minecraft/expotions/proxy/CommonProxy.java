@@ -16,17 +16,17 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
-        Main.getLogger().info("Starting pre-init of Explosive Potions mod version " + Main.VERSION);
+        Main.getLogger().info("Starting pre-init of Explosive Potions mod version " + Main.MOD_VERSION);
         GameRegistry.registerItem(ItemExplosivePotion.instance, "potion_explosive");
         GameRegistry.registerItem(ItemThrowableExplosivePotion.instance, "potion_throwable_explosive");
         EntityRegistry.registerModEntity(EntityExplosivePotion.class, "ThrowableExplosivePotion", 690, Main.instance, 2, 5, true);
     }
 	
 	public void init(FMLInitializationEvent event) {
-        Main.getLogger().info("Starting init of Explosive Potions mod version " + Main.VERSION);
+        Main.getLogger().info("Starting init of Explosive Potions mod version " + Main.MOD_VERSION);
     }
 	
 	public void postInit(FMLPostInitializationEvent event) {
-		Main.getLogger().info("Starting post-init of Explosive Potions mod version " + Main.VERSION);
+		Main.getLogger().info("Starting post-init of Explosive Potions mod version " + Main.MOD_VERSION);
 	}
 }

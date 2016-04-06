@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 	public void init(FMLInitializationEvent event) {
-        Main.getLogger().info("Starting client-side init of Explosive Potions mod version " + Main.VERSION);
+        Main.getLogger().info("Starting client-side init of Explosive Potions mod version " + Main.MOD_VERSION);
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(ItemExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_explosive", "inventory"));
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(ItemThrowableExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_throwable_explosive", "inventory"));
         GameRegistry.addShapelessRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Items.glass_bottle), new ItemStack(Items.gunpowder));
