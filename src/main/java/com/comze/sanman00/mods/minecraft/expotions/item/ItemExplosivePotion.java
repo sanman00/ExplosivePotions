@@ -1,11 +1,17 @@
 package com.comze.sanman00.mods.minecraft.expotions.item;
 
+import com.comze.sanman00.mods.minecraft.expotions.Main;
 import com.comze.sanman00.mods.minecraft.expotions.tabs.ExplosivePotionsCreativeTab;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
@@ -18,7 +24,7 @@ public class ItemExplosivePotion extends Item {
     public static final Item instance = new ItemExplosivePotion();
 
     private ItemExplosivePotion() {
-        this.setUnlocalizedName("potion_explosive").setMaxStackSize(1).setCreativeTab(ExplosivePotionsCreativeTab.instance);
+        this.setUnlocalizedName("potion_explosive").setRegistryName(Main.MOD_ID, "potion_explosive").setMaxStackSize(1).setCreativeTab(ExplosivePotionsCreativeTab.instance);
     }
 
     @Override
@@ -37,18 +43,26 @@ public class ItemExplosivePotion extends Item {
     }
 
     @Override
+    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+    }
+    
+    /*@Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         player.setItemInUse(stack, getMaxItemUseDuration(stack));
         return stack;
-    }
+    }*/
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
-        Explosion explosion = world.newExplosion(null, player.posX, player.posY, player.posZ, 5.0f, true, true);
+    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entity) {
+        Explosion explosion = world.newExplosion(null, entity.posX, entity.posY, entity.posZ, 5.0f, true, true);
         explosion.doExplosionA();
         explosion.doExplosionB(true);
-        
-        if (!player.capabilities.isCreativeMode) {
+        if (!(entity instanceof EntityPlayerMP)) {
+            return stack;
+        }
+        EntityPlayerMP player = (EntityPlayerMP) entity;
+        if (player.interactionManager.isCreative()) {
             --stack.stackSize;
 
             if (stack.stackSize <= 0) {

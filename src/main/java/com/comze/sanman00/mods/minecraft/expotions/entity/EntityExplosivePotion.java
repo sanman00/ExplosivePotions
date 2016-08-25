@@ -2,8 +2,8 @@ package com.comze.sanman00.mods.minecraft.expotions.entity;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityExplosivePotion extends EntityThrowable {
@@ -19,15 +19,14 @@ public class EntityExplosivePotion extends EntityThrowable {
 		super(world, thrower);
 	}
 
-	@Override
-	protected void onImpact(MovingObjectPosition pos) {
-		World world = super.worldObj;
-		
-		if (!world.isRemote && pos != null && pos.getBlockPos() != null) {
-			world.newExplosion(null, pos.getBlockPos().getX(), pos.getBlockPos().getY(), pos.getBlockPos().getZ(), 100.0f, false, true);
-			
+    @Override
+    protected void onImpact(RayTraceResult result) {
+        World world = super.worldObj;
+        
+        if (!world.isRemote && result != null && result.getBlockPos() != null) {
+            world.newExplosion(null, result.getBlockPos().getX(), result.getBlockPos().getY(), result.getBlockPos().getZ(), 100.0f, false, true);
             this.worldObj.playAuxSFX(2002, new BlockPos(this), 1);
             this.setDead();
-		}
-	}
+        }
+    }
 }

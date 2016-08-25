@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = Main.MOD_ID, version = Main.MOD_VERSION, name = Main.MOD_NAME)
 public class Main {
     public static final String MOD_ID = "expotions";
-    public static final String MOD_VERSION = "0.0.10";
+    public static final String MOD_VERSION = "0.0.11pre1";
     public static final String MOD_NAME = "Explosive Potions";
     @SidedProxy(clientSide = "com.comze.sanman00.mods.minecraft.expotions.proxy.ClientProxy", 
                 serverSide = "com.comze.sanman00.mods.minecraft.expotions.proxy.CommonProxy", 
