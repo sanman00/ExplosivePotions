@@ -41,9 +41,11 @@ public class ItemThrowableExplosivePotion extends Item {
 	    if (!player.capabilities.isCreativeMode) {
             --stack.stackSize;
         }
-        world.playSound(player, player.getPosition(), SoundEvents.entity_arrow_shoot, SoundCategory.NEUTRAL,  0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        world.playSound(player, player.getPosition(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL,  0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
         if (!world.isRemote) {
-            world.spawnEntityInWorld(new EntityExplosivePotion(world, player));
+            EntityExplosivePotion potion = new EntityExplosivePotion(world, player);
+            potion.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, -20.0F, 0.5F, 1.0F);
+            world.spawnEntityInWorld(potion);
         }
         return new ActionResult<>(EnumActionResult.PASS, stack);
 	}

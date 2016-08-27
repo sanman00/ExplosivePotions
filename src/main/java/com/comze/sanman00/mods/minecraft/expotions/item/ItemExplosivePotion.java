@@ -4,7 +4,6 @@ import com.comze.sanman00.mods.minecraft.expotions.Main;
 import com.comze.sanman00.mods.minecraft.expotions.tabs.ExplosivePotionsCreativeTab;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -17,8 +16,6 @@ import net.minecraft.world.World;
 
 /**
  * The exploding potion item.
- *
- * @author sanman00
  */
 public class ItemExplosivePotion extends Item {
     public static final Item instance = new ItemExplosivePotion();
@@ -44,33 +41,27 @@ public class ItemExplosivePotion extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+        player.setActiveHand(hand);
+        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
-    
-    /*@Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        player.setItemInUse(stack, getMaxItemUseDuration(stack));
-        return stack;
-    }*/
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entity) {
-        Explosion explosion = world.newExplosion(null, entity.posX, entity.posY, entity.posZ, 5.0f, true, true);
+        Explosion explosion = world.newExplosion(null, entity.posX, entity.posY, entity.posZ, 5.0f, false, true);
         explosion.doExplosionA();
         explosion.doExplosionB(true);
-        if (!(entity instanceof EntityPlayerMP)) {
+        if (!(entity instanceof EntityPlayer)) {
             return stack;
         }
-        EntityPlayerMP player = (EntityPlayerMP) entity;
-        if (player.interactionManager.isCreative()) {
+        EntityPlayer player = (EntityPlayer) entity;
+        if (!player.capabilities.isCreativeMode) {
             --stack.stackSize;
 
             if (stack.stackSize <= 0) {
-                return new ItemStack(Items.glass_bottle);
+                return new ItemStack(Items.GLASS_BOTTLE);
             }
 
-            player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
-            
+            player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
         }
         
         return stack;
