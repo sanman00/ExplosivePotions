@@ -21,7 +21,8 @@ public class ItemExplosivePotion extends Item {
     public static final Item instance = new ItemExplosivePotion();
 
     private ItemExplosivePotion() {
-        this.setUnlocalizedName("potion_explosive").setRegistryName(Main.MOD_ID, "potion_explosive").setMaxStackSize(1).setCreativeTab(ExplosivePotionsCreativeTab.instance);
+        this.setUnlocalizedName("potion_explosive").setRegistryName(Main.MOD_ID, "potion_explosive").setMaxStackSize(1)
+                .setCreativeTab(ExplosivePotionsCreativeTab.instance);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class ItemExplosivePotion extends Item {
 
             player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
         }
-        
+
         return stack;
     }
 
