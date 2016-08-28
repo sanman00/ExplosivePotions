@@ -4,7 +4,7 @@
         "name": "Explosive Potions",
         "description": "A mod that adds an explosive potion that explodes when you drink it!",
         "version": "${version}",
-        "mcversion": "1.9",
+        "mcversion": "1.9.4",
         "authorList": ["sanman00"],
         "credits": "",
         "logoFile": ""

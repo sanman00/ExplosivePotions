@@ -50,7 +50,7 @@ public class ItemThrowableExplosivePotion extends Item {
             potion.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, -20.0F, 0.5F, 1.0F);
             world.spawnEntityInWorld(potion);
         }
-        return new ActionResult<>(EnumActionResult.PASS, stack);
+        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
     @Override
