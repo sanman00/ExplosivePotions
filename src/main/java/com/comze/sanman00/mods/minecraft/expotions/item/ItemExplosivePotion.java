@@ -21,7 +21,10 @@ public class ItemExplosivePotion extends Item {
     public static final Item instance = new ItemExplosivePotion();
 
     private ItemExplosivePotion() {
-        this.setUnlocalizedName("potion_explosive").setRegistryName(Main.MOD_ID, "potion_explosive").setMaxStackSize(1).setCreativeTab(ExplosivePotionsCreativeTab.instance);
+        this.setUnlocalizedName("potion_explosive")
+            .setRegistryName(Main.MOD_ID, "potion_explosive")
+            .setMaxStackSize(1)
+            .setCreativeTab(ExplosivePotionsCreativeTab.instance);
     }
 
     @Override
@@ -50,6 +53,7 @@ public class ItemExplosivePotion extends Item {
         Explosion explosion = world.newExplosion(null, entity.posX, entity.posY, entity.posZ, 5.0f, false, true);
         explosion.doExplosionA();
         explosion.doExplosionB(true);
+        
         if (!(entity instanceof EntityPlayer)) {
             return stack;
         }
@@ -60,10 +64,9 @@ public class ItemExplosivePotion extends Item {
             if (stack.stackSize <= 0) {
                 return new ItemStack(Items.GLASS_BOTTLE);
             }
-
             player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
         }
-        
+
         return stack;
     }
 
