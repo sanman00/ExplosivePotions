@@ -5,6 +5,8 @@ import com.comze.sanman00.mods.minecraft.expotions.item.ItemExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemThrowableExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.client.render.RenderExplosivePotion;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -29,11 +31,16 @@ public class ClientProxy extends CommonProxy {
 
     public void init(FMLInitializationEvent event) {
         super.init(event);
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(ItemExplosivePotion.instance, 0,
-                new ModelResourceLocation("expotions:potion_explosive", "inventory"));
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(ItemThrowableExplosivePotion.instance, 0,
-                new ModelResourceLocation("expotions:potion_throwable_explosive", "inventory"));
-        GameRegistry.addShapelessRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Items.GLASS_BOTTLE),
-                new ItemStack(Items.GUNPOWDER));
+        getItemModelMesher().register(ItemExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_explosive", "inventory"));
+        getItemModelMesher().register(ItemThrowableExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_throwable_explosive", "inventory"));
+        GameRegistry.addShapelessRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Items.GLASS_BOTTLE), new ItemStack(Items.GUNPOWDER));
+    }
+    
+    /**
+     * Convenience function for getting the {@code ItemModelMesher}.
+     * @return The {@code ItemModelMesher} from {@link RenderItem#getItemModelMesher()} via {@link Minecraft#getRenderItem()}
+     */
+    public static ItemModelMesher getItemModelMesher() {
+        return Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
     }
 }

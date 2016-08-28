@@ -18,8 +18,7 @@ public class CommonProxy {
         Main.getLogger().info("Starting pre-initialisation of Explosive Potions mod version " + Main.MOD_VERSION);
         GameRegistry.register(ItemExplosivePotion.instance);
         GameRegistry.register(ItemThrowableExplosivePotion.instance);
-        EntityRegistry.registerModEntity(EntityExplosivePotion.class, "ThrowableExplosivePotion", 690, Main.instance, 2,
-                5, true);
+        EntityRegistry.registerModEntity(EntityExplosivePotion.class, "ThrowableExplosivePotion", 690, Main.instance, 2, 5, true);
     }
 
     public void init(FMLInitializationEvent event) {

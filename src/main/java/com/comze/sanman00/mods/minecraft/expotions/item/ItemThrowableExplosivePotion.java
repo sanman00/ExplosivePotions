@@ -18,8 +18,10 @@ public class ItemThrowableExplosivePotion extends Item {
     public static final Item instance = new ItemThrowableExplosivePotion();
 
     private ItemThrowableExplosivePotion() {
-        this.setUnlocalizedName("potion_throwable_explosive").setRegistryName(Main.MOD_ID, "potion_throwable_explosive")
-                .setMaxStackSize(1).setCreativeTab(ExplosivePotionsCreativeTab.instance);
+        this.setUnlocalizedName("potion_throwable_explosive")
+            .setRegistryName(Main.MOD_ID, "potion_throwable_explosive")
+            .setMaxStackSize(1)
+            .setCreativeTab(ExplosivePotionsCreativeTab.instance);
     }
 
     @Override
@@ -42,8 +44,7 @@ public class ItemThrowableExplosivePotion extends Item {
         if (!player.capabilities.isCreativeMode) {
             --stack.stackSize;
         }
-        world.playSound(player, player.getPosition(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 0.5F,
-                0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        world.playSound(player, player.getPosition(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
         if (!world.isRemote) {
             EntityExplosivePotion potion = new EntityExplosivePotion(world, player);
             potion.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, -20.0F, 0.5F, 1.0F);
