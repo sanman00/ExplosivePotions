@@ -4,11 +4,13 @@ import com.comze.sanman00.mods.minecraft.expotions.Main;
 import com.comze.sanman00.mods.minecraft.expotions.entity.EntityExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemThrowableExplosivePotion;
+import com.comze.sanman00.mods.minecraft.expotions.util.WaterBottleOnlyInputBrewingRecipe;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionUtils;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -26,12 +28,33 @@ public class CommonProxy {
         GameRegistry.register(ItemExplosivePotion.instance);
         GameRegistry.register(ItemThrowableExplosivePotion.instance);
         EntityRegistry.registerModEntity(EntityExplosivePotion.class, "ThrowableExplosivePotion", 690, Main.instance, 2, 5, true);
-        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(Items.POTIONITEM), new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)) {
-            //Hack to make sure that only water bottles work with this
+        BrewingRecipeRegistry.addRecipe(new WaterBottleOnlyInputBrewingRecipe(new ItemStack(Items.POTIONITEM), new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)) {
             @Override
-            public boolean isInput(ItemStack stack) {
-                return super.isInput(stack) && PotionUtils.getPotionFromItem(stack).equals(PotionTypes.WATER);
+            public ItemStack getOutput() {
+                ItemStack outputStack = super.getOutput();
+                NBTTagCompound displayCompound = outputStack.getSubCompound("display", true);
+                NBTTagList lore = displayCompound.getTagList("Lore", 8);
+                lore.appendTag(new NBTTagString("Strength: " + outputStack.getItemDamage()));
+                return outputStack;
             }
+        });
+        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)) {
+            @Override
+            public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
+                if (input.getItem() == ItemExplosivePotion.instance && ingredient.getItem().equals(Blocks.TNT)) {
+                    input.setItemDamage(input.getItemDamage() + 1);
+                    return input;
+                }
+                
+                return super.getOutput(input, ingredient);
+            }
+            
+            //@Override
+            //public ItemStack getOutput() {
+            //    ItemStack outputStack = super.getOutput();
+            //    outputStack.setItemDamage(outputStack.getItemDamage() + 1);
+            //    return outputStack;
+            //}
         });
         BrewingRecipeRegistry.addRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Items.GUNPOWDER), new ItemStack(ItemThrowableExplosivePotion.instance));
     }
