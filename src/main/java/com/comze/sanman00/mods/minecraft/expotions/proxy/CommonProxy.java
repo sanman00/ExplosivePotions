@@ -1,5 +1,8 @@
 package com.comze.sanman00.mods.minecraft.expotions.proxy;
 
+import java.lang.reflect.Field;
+import java.util.List;
+import org.apache.logging.log4j.Level;
 import com.comze.sanman00.mods.minecraft.expotions.Main;
 import com.comze.sanman00.mods.minecraft.expotions.entity.EntityExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemExplosivePotion;
@@ -8,6 +11,7 @@ import com.comze.sanman00.mods.minecraft.expotions.util.WaterBottleOnlyInputBrew
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
@@ -35,28 +39,40 @@ public class CommonProxy {
                 NBTTagCompound displayCompound = outputStack.getSubCompound("display", true);
                 NBTTagList lore = displayCompound.getTagList("Lore", 8);
                 lore.appendTag(new NBTTagString("Strength: " + outputStack.getItemDamage()));
+                displayCompound.setTag("Lore", lore);
                 return outputStack;
             }
         });
         BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)) {
             @Override
             public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
-                if (input.getItem() == ItemExplosivePotion.instance && ingredient.getItem().equals(Blocks.TNT)) {
-                    input.setItemDamage(input.getItemDamage() + 1);
-                    return input;
-                }
-                
-                return super.getOutput(input, ingredient);
+                ItemStack outputStack = new ItemStack(ItemExplosivePotion.instance, 1, input.getItemDamage() + 1);
+                NBTTagCompound displayCompound = outputStack.getSubCompound("display", true);
+                NBTTagList lore = displayCompound.getTagList("Lore", 8);
+                applyStrengthLore(lore, outputStack.getItemDamage());
+                displayCompound.setTag("Lore", lore);
+                return outputStack;
             }
-            
-            //@Override
-            //public ItemStack getOutput() {
-            //    ItemStack outputStack = super.getOutput();
-            //    outputStack.setItemDamage(outputStack.getItemDamage() + 1);
-            //    return outputStack;
-            //}
         });
         BrewingRecipeRegistry.addRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Items.GUNPOWDER), new ItemStack(ItemThrowableExplosivePotion.instance));
+    }
+    
+    private static void applyStrengthLore(NBTTagList lore, int strength) {
+        //replace with AT?
+        try {
+            Field tagListField = lore.getClass().getDeclaredField("tagList");
+            tagListField.setAccessible(true);
+            @SuppressWarnings("unchecked")
+            List<NBTBase> tagList = (List<NBTBase>) tagListField.get(lore);
+            tagList.clear();
+            tagListField.set(lore, tagList);
+            lore.appendTag(new NBTTagString("Strength: " + strength));
+        }
+        
+        catch (NoSuchFieldException | IllegalAccessException e) {
+            Main.getLogger().log(Level.ERROR, "Could not access tagList field, unable to apply strength lore");
+            e.printStackTrace();
+        }
     }
 
     public void init(FMLInitializationEvent event) {

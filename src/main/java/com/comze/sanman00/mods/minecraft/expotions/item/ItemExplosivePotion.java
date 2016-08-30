@@ -1,5 +1,6 @@
 package com.comze.sanman00.mods.minecraft.expotions.item;
 
+import java.util.List;
 import com.comze.sanman00.mods.minecraft.expotions.Main;
 import com.comze.sanman00.mods.minecraft.expotions.tabs.ExplosivePotionsCreativeTab;
 import net.minecraft.entity.EntityLivingBase;
@@ -51,7 +52,8 @@ public class ItemExplosivePotion extends Item {
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entity) {
         int strength = stack.getItemDamage();
-        Explosion explosion = world.newExplosion(null, entity.posX, entity.posY, entity.posZ, stack.getItemDamage() == 1 ? 2.0f : strength * 5.0f, false, true);
+        System.out.println(strength);
+        Explosion explosion = world.newExplosion(null, entity.posX, entity.posY, entity.posZ, stack.getItemDamage() > 0 ? strength * 5.0f : 2.0f, false, true);
         explosion.doExplosionA();
         explosion.doExplosionB(true);
         
@@ -74,5 +76,31 @@ public class ItemExplosivePotion extends Item {
     @Override
     public boolean hasEffect(ItemStack stack) {
         return true;
+    }
+    
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+        //Get strength here (from nbt?) and put it into the tooltip
+        //tooltip.add("Strength: " + strength);
+    }
+    
+    /**
+     * A utility method that returns the strength of the supplied potion.
+     * 
+     * @param stack The item stack that represents an explosive potion
+     * @return The strength of this potion
+     */
+    public static int getStrength(ItemStack stack) {
+        return 0; //TODO
+    }
+    
+    /**
+     * A utility method that sets the strength of the supplied potion.
+     * 
+     * @param stack The item stack that represents an explosive potion
+     * @param strength The strength that is to be set onto this potion
+     */
+    public static void setStrength(ItemStack stack, int strength) {
+        //TODO
     }
 }
