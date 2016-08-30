@@ -3,6 +3,7 @@ package com.comze.sanman00.mods.minecraft.expotions.item;
 import java.util.List;
 import com.comze.sanman00.mods.minecraft.expotions.Main;
 import com.comze.sanman00.mods.minecraft.expotions.tabs.ExplosivePotionsCreativeTab;
+import com.comze.sanman00.mods.minecraft.expotions.util.StackUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -90,7 +91,7 @@ public class ItemExplosivePotion extends Item {
      * @return The strength of this potion
      */
     public static int getStrength(ItemStack stack) {
-        return stack.getTagCompound().getInteger("PotionStrength");
+        return StackUtil.getOrCreateTagCompound(stack).getInteger("PotionStrength");
     }
     
     /**
@@ -100,6 +101,6 @@ public class ItemExplosivePotion extends Item {
      * @param strength The strength that is to be set onto this potion
      */
     public static void setStrength(ItemStack stack, int strength) {
-        stack.getTagCompound().setInteger("PotionStrength", strength);
+        StackUtil.getOrCreateTagCompound(stack).setInteger("PotionStrength", strength);
     }
 }
