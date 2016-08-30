@@ -80,8 +80,7 @@ public class ItemExplosivePotion extends Item {
     
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        //Get strength here (from nbt?) and put it into the tooltip
-        //tooltip.add("Strength: " + strength);
+        tooltip.add("Strength: " + getStrength(stack));
     }
     
     /**
@@ -91,7 +90,7 @@ public class ItemExplosivePotion extends Item {
      * @return The strength of this potion
      */
     public static int getStrength(ItemStack stack) {
-        return 0; //TODO
+        return stack.getTagCompound().getInteger("PotionStrength");
     }
     
     /**
@@ -101,6 +100,6 @@ public class ItemExplosivePotion extends Item {
      * @param strength The strength that is to be set onto this potion
      */
     public static void setStrength(ItemStack stack, int strength) {
-        //TODO
+        stack.getTagCompound().setInteger("PotionStrength", strength);
     }
 }
