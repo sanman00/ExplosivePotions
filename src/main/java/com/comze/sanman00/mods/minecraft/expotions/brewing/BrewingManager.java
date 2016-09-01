@@ -10,10 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import net.minecraftforge.event.brewing.PotionBrewEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public final class BrewingManager {
     public static void registerRecipes() {
-        BrewingRecipeRegistry.addRecipe(new WaterBottleOnlyInputBrewingRecipe(new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)) {
+        BrewingRecipeRegistry.addRecipe(new WaterBottleOnlyInputBrewingRecipe(new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)) /*{
             @Override
             public ItemStack getOutput() {
                 System.out.println("test1");
@@ -21,8 +23,8 @@ public final class BrewingManager {
                 StackUtil.getOrCreateTagCompound(outputStack).setInteger("PotionStrength", 0);
                 return outputStack;
             }
-        });
-        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)) {
+        }*/);
+        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)) /*{
             @Override
             public ItemStack getOutput() {
                 System.out.println("test2");
@@ -32,7 +34,18 @@ public final class BrewingManager {
                 compound.setInteger("PotionStrength", strength + 1);
                 return outputStack;
             }
-        });
+        }*/);
         BrewingRecipeRegistry.addRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Items.GUNPOWDER), new ItemStack(ItemThrowableExplosivePotion.instance));
+    }
+    
+    @SubscribeEvent
+    public void onBrew(PotionBrewEvent.Post event) {
+        for (int x = 0;x < 10;x++) {
+            try {
+                System.out.println(event.getItem(x));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
