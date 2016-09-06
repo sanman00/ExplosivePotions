@@ -53,8 +53,7 @@ public class ItemExplosivePotion extends Item {
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entity) {
         int strength = stack.getItemDamage();
-        System.out.println(strength);
-        Explosion explosion = world.newExplosion(null, entity.posX, entity.posY, entity.posZ, stack.getItemDamage() > 0 ? strength * 5.0f : 2.0f, false, true);
+        Explosion explosion = world.newExplosion(null, entity.posX, entity.posY, entity.posZ, strength > 0 ? strength * 5.0f : 2.0f, false, true);
         explosion.doExplosionA();
         explosion.doExplosionB(true);
         

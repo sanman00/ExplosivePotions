@@ -29,23 +29,8 @@ public final class BrewingManager {
     }
     
     public static void registerRecipes() {
-        BrewingRecipeRegistry.addRecipe(new WaterBottleOnlyInputBrewingRecipe(new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)) /*{
-            @Override
-            public ItemStack getOutput() {
-                System.out.println("test1");
-                ItemStack outputStack = super.getOutput();
-                StackUtil.getOrCreateTagCompound(outputStack).setInteger("PotionStrength", 0);
-                return outputStack;
-            }
-        }*/);
-        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)) /*{
-            @Override
-            public ItemStack getOutput() {
-                System.out.println("test2");
-                
-                return outputStack;
-            }
-        }*/);
+        BrewingRecipeRegistry.addRecipe(new WaterBottleOnlyInputBrewingRecipe(new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)));
+        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)));
         BrewingRecipeRegistry.addRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Items.GUNPOWDER), new ItemStack(ItemThrowableExplosivePotion.instance));
     }
     
@@ -56,9 +41,8 @@ public final class BrewingManager {
     @SubscribeEvent
     public void onBrew(PotionBrewEvent.Post event) {
         List<ItemStack> potions = Lists.newArrayList(event.getItem(0), event.getItem(1), event.getItem(2));
-        potions
-            .stream()
-            .filter(stack -> stack.getItem().equals(ItemExplosivePotion.instance))
+        potions.stream()
+            .filter(stack -> stack != null ? stack.getItem().equals(ItemExplosivePotion.instance) : false)
             .forEach(stack -> {
                 NBTTagCompound compound = StackUtil.getOrCreateTagCompound(stack);
                 int strength = compound.getInteger("PotionStrength");
