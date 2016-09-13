@@ -7,6 +7,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityExplosivePotion extends EntityThrowable {
+    private int strength;
+    
     public EntityExplosivePotion(World worldIn) {
         super(worldIn);
     }
@@ -19,11 +21,14 @@ public class EntityExplosivePotion extends EntityThrowable {
         super(world, thrower);
     }
 
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
     @Override
     protected void onImpact(RayTraceResult result) {
         if (!this.worldObj.isRemote && result != null && result.getBlockPos() != null) {
             BlockPos pos = result.getBlockPos();
-            this.worldObj.newExplosion(this, pos.getX(), pos.getY(), pos.getZ(), 5.0f, false, true);
+            this.worldObj.newExplosion(this, pos.getX(), pos.getY(), pos.getZ(), this.strength <= 0 ? 2.0f : 5.0f * this.strength, false, true);
             this.worldObj.playBroadcastSound(2002, new BlockPos(this), 1);
             this.setDead();
         }
