@@ -20,7 +20,7 @@ public class CommonProxy {
         GameRegistry.register(ItemExplosivePotion.instance);
         GameRegistry.register(ItemThrowableExplosivePotion.instance);
         EntityRegistry.registerModEntity(EntityExplosivePotion.class, "ThrowableExplosivePotion", 690, Main.instance, 2, 5, true);
-        BrewingManager.init();
+        BrewingManager.INSTANCE.init();
     }
 
     public void init(FMLInitializationEvent event) {

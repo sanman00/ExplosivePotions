@@ -4,6 +4,7 @@ import java.util.List;
 import com.comze.sanman00.mods.minecraft.expotions.Main;
 import com.comze.sanman00.mods.minecraft.expotions.tabs.ExplosivePotionsCreativeTab;
 import com.comze.sanman00.mods.minecraft.expotions.util.StackUtil;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -29,6 +30,17 @@ public class ItemExplosivePotion extends Item {
             .setCreativeTab(ExplosivePotionsCreativeTab.instance);
     }
 
+    @Override
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
+        if (tab == ExplosivePotionsCreativeTab.instance && item == ItemExplosivePotion.instance) {
+            for (int strength = 0;strength <= 10;strength++) {
+                ItemStack stack = new ItemStack(item);
+                setStrength(stack, strength);
+                subItems.add(stack);
+            }
+        }
+    }
+    
     @Override
     public boolean showDurabilityBar(ItemStack stack) {
         return false;
@@ -90,7 +102,7 @@ public class ItemExplosivePotion extends Item {
      * @return The strength of this potion
      */
     public static int getStrength(ItemStack stack) {
-        return StackUtil.getOrCreateTagCompound(stack).getInteger("PotionStrength");
+        return stack != null ? StackUtil.getOrCreateTagCompound(stack).getInteger("PotionStrength") : 0;
     }
     
     /**
@@ -100,6 +112,8 @@ public class ItemExplosivePotion extends Item {
      * @param strength The strength that is to be set onto this potion
      */
     public static void setStrength(ItemStack stack, int strength) {
-        StackUtil.getOrCreateTagCompound(stack).setInteger("PotionStrength", strength);
+        if (stack != null) {
+            StackUtil.getOrCreateTagCompound(stack).setInteger("PotionStrength", strength);
+        }
     }
 }
