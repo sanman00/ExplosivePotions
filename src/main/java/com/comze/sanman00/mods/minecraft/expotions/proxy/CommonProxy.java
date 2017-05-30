@@ -5,6 +5,7 @@ import com.comze.sanman00.mods.minecraft.expotions.brewing.BrewingManager;
 import com.comze.sanman00.mods.minecraft.expotions.entity.EntityExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemThrowableExplosivePotion;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -19,7 +20,7 @@ public class CommonProxy {
         Main.getLogger().info("Starting pre-initialisation of Explosive Potions mod version " + Main.MOD_VERSION);
         GameRegistry.register(ItemExplosivePotion.instance);
         GameRegistry.register(ItemThrowableExplosivePotion.instance);
-        EntityRegistry.registerModEntity(EntityExplosivePotion.class, "ThrowableExplosivePotion", 690, Main.instance, 2, 5, true);
+        EntityRegistry.registerModEntity(new ResourceLocation("expotions:potion_throwable_explosive"), EntityExplosivePotion.class, "ThrowableExplosivePotion", 690, Main.instance, 2, 5, true);
         BrewingManager.INSTANCE.init();
     }
 

@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
@@ -31,7 +32,7 @@ public class ItemExplosivePotion extends Item {
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
+    public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems) {
         if (tab == ExplosivePotionsCreativeTab.instance && item == ItemExplosivePotion.instance) {
             for (int strength = 0;strength <= 10;strength++) {
                 ItemStack stack = new ItemStack(item);
@@ -57,9 +58,9 @@ public class ItemExplosivePotion extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         player.setActiveHand(hand);
-        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+        return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
     }
 
     @Override
@@ -74,9 +75,9 @@ public class ItemExplosivePotion extends Item {
         }
         EntityPlayer player = (EntityPlayer) entity;
         if (!player.capabilities.isCreativeMode) {
-            --stack.stackSize;
+            stack.shrink(1);
 
-            if (stack.stackSize <= 0) {
+            if (stack.getCount() <= 0) {
                 return new ItemStack(Items.GLASS_BOTTLE);
             }
             player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
