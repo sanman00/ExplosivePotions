@@ -26,10 +26,10 @@ public class EntityExplosivePotion extends EntityThrowable {
     }
     @Override
     protected void onImpact(RayTraceResult result) {
-        if (!this.worldObj.isRemote && result != null && result.getBlockPos() != null) {
+        if (!this.getEntityWorld().isRemote && result != null && result.getBlockPos() != null) {
             BlockPos pos = result.getBlockPos();
-            this.worldObj.newExplosion(this, pos.getX(), pos.getY(), pos.getZ(), this.strength <= 0 ? 2.0f : 5.0f * this.strength, false, true);
-            this.worldObj.playBroadcastSound(2002, new BlockPos(this), 1);
+            this.getEntityWorld().newExplosion(this, pos.getX(), pos.getY(), pos.getZ(), this.strength <= 0 ? 2.0f : 5.0f * this.strength, false, true);
+            this.getEntityWorld().playBroadcastSound(2002, new BlockPos(this), 1);
             this.setDead();
         }
     }
