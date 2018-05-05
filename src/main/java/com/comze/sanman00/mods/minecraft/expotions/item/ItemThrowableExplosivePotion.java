@@ -10,6 +10,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -44,20 +45,17 @@ public class ItemThrowableExplosivePotion extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-        ItemStack stack = player.getHeldItem(hand);
-        if (!stack.getItem().equals(ItemThrowableExplosivePotion.instance)) {
-            return new ActionResult<>(EnumActionResult.PASS, stack);
-        }
-        if (!player.capabilities.isCreativeMode) {
-            stack.shrink(1);
-        }
-        world.playSound(null, player.getPosition(), SoundEvents.ENTITY_SPLASH_POTION_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        ItemStack originalStack = player.getHeldItem(hand);
+        ItemStack stack = player.capabilities.isCreativeMode ? originalStack.copy() : originalStack.splitStack(1);
+        world.playSound(null, player.getPosition(), SoundEvents.ENTITY_SPLASH_POTION_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        
         if (!world.isRemote) {
             EntityExplosivePotion potion = new EntityExplosivePotion(player.world, player);
             potion.setStrength(ItemExplosivePotion.getStrength(stack));
             potion.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, -20.0F, 0.5F, 1.0F);
             player.world.spawnEntity(potion);
         }
+        player.addStat(StatList.getObjectUseStats(this));
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
