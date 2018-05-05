@@ -7,7 +7,7 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ExplosivePotionDispenseBehaviour extends BehaviorProjectileDispense {
+public class DispenseBehaviourExplosivePotion extends BehaviorProjectileDispense {
 
     @Override
     protected IProjectile getProjectileEntity(World world, IPosition position, ItemStack stack) {

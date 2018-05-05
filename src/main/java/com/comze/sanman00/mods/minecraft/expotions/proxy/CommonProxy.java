@@ -3,7 +3,7 @@ package com.comze.sanman00.mods.minecraft.expotions.proxy;
 import com.comze.sanman00.mods.minecraft.expotions.Main;
 import com.comze.sanman00.mods.minecraft.expotions.brewing.BrewingManager;
 import com.comze.sanman00.mods.minecraft.expotions.entity.EntityExplosivePotion;
-import com.comze.sanman00.mods.minecraft.expotions.entity.ExplosivePotionDispenseBehaviour;
+import com.comze.sanman00.mods.minecraft.expotions.entity.DispenseBehaviourExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemThrowableExplosivePotion;
 import net.minecraft.block.BlockDispenser;
@@ -22,7 +22,7 @@ public class CommonProxy {
         Main.getLogger().info("Starting pre-initialisation of Explosive Potions mod version " + Main.MOD_VERSION);
         GameRegistry.register(ItemExplosivePotion.instance);
         GameRegistry.register(ItemThrowableExplosivePotion.instance);
-        BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(ItemThrowableExplosivePotion.instance, new ExplosivePotionDispenseBehaviour());
+        BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(ItemThrowableExplosivePotion.instance, new DispenseBehaviourExplosivePotion());
         EntityRegistry.registerModEntity(new ResourceLocation("expotions:potion_throwable_explosive"), EntityExplosivePotion.class, "ThrowableExplosivePotion", 690, Main.instance, 2, 5, true);
         BrewingManager.INSTANCE.init();
     }

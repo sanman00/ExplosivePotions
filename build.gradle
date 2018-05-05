@@ -16,12 +16,12 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
-version = "1.11.2-0.0.15"
-group= "com.comze.sanman00.expotions" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = "1.11.2-0.0.16"
+group = "com.comze.sanman00.expotions" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "expotions"
 
 minecraft {
-    version = "1.11.2-13.20.0.2310"
+    version = "1.11.2-13.20.1.2588"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
