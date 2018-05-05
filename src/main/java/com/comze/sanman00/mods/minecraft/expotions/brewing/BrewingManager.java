@@ -67,6 +67,7 @@ public final class BrewingManager {
                 if (strength < 10) {
                     compound.setInteger("PotionStrength", strength + 1);
                 }
+                compound.removeTag("PotionStrengthCheck");
             });
     }
     

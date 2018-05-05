@@ -1,9 +1,9 @@
 package com.comze.sanman00.mods.minecraft.expotions.item;
 
 import java.util.List;
+
 import com.comze.sanman00.mods.minecraft.expotions.Main;
 import com.comze.sanman00.mods.minecraft.expotions.tabs.ExplosivePotionsCreativeTab;
-import com.comze.sanman00.mods.minecraft.expotions.util.StackUtil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,22 +17,22 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
-public class ItemExplosivePotion extends Item {
-    public static final Item instance = new ItemExplosivePotion();
+public class ItemSpicyExplosivePotion extends Item {
+    public static final Item instance = new ItemSpicyExplosivePotion();
 
-    private ItemExplosivePotion() {
-        this.setUnlocalizedName("potion_explosive")
-            .setRegistryName(Main.MOD_ID, "potion_explosive")
+    private ItemSpicyExplosivePotion() {
+        this.setUnlocalizedName("potion_explosive_spicy")
+            .setRegistryName(Main.MOD_ID, "potion_explosive_spicy")
             .setMaxStackSize(1)
             .setCreativeTab(ExplosivePotionsCreativeTab.instance);
     }
-
+    
     @Override
     public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        if (tab == ExplosivePotionsCreativeTab.instance && item == ItemExplosivePotion.instance) {
+        if (tab == ExplosivePotionsCreativeTab.instance && item == ItemSpicyExplosivePotion.instance) {
             for (int strength = 0;strength <= 10;strength++) {
                 ItemStack stack = new ItemStack(item);
-                setStrength(stack, strength);
+                ItemExplosivePotion.setStrength(stack, strength);
                 subItems.add(stack);
             }
         }
@@ -61,8 +61,8 @@ public class ItemExplosivePotion extends Item {
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entity) {
-        int strength = getStrength(stack);
-        world.newExplosion(null, entity.posX, entity.posY, entity.posZ, strength > 0 ? strength * 5.0f : 2.0f, false, true);
+        int strength = ItemExplosivePotion.getStrength(stack);
+        world.newExplosion(null, entity.posX, entity.posY, entity.posZ, strength > 0 ? strength * 5.0f : 2.0f, true, true);
         
         if (!(entity instanceof EntityPlayer)) {
             return stack;
@@ -87,28 +87,6 @@ public class ItemExplosivePotion extends Item {
     
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        tooltip.add("Strength: " + getStrength(stack));
-    }
-    
-    /**
-     * A utility method that returns the strength of the supplied potion.
-     * 
-     * @param stack The item stack that represents an explosive potion
-     * @return The strength of this potion
-     */
-    public static int getStrength(ItemStack stack) {
-        return stack != null ? StackUtil.getOrCreateTagCompound(stack).getInteger("PotionStrength") : 0;
-    }
-    
-    /**
-     * A utility method that sets the strength of the supplied potion.
-     * 
-     * @param stack The item stack that represents an explosive potion
-     * @param strength The strength that is to be set onto this potion
-     */
-    public static void setStrength(ItemStack stack, int strength) {
-        if (stack != null) {
-            StackUtil.getOrCreateTagCompound(stack).setInteger("PotionStrength", strength);
-        }
+        tooltip.add("Strength: " + ItemExplosivePotion.getStrength(stack));
     }
 }

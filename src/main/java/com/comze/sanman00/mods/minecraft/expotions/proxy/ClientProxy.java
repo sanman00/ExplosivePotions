@@ -2,6 +2,8 @@ package com.comze.sanman00.mods.minecraft.expotions.proxy;
 
 import com.comze.sanman00.mods.minecraft.expotions.entity.EntityExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemExplosivePotion;
+import com.comze.sanman00.mods.minecraft.expotions.item.ItemSpicyExplosivePotion;
+import com.comze.sanman00.mods.minecraft.expotions.item.ItemSpicyThrowableExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemThrowableExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.client.render.RenderExplosivePotion;
 import net.minecraft.client.Minecraft;
@@ -30,6 +32,8 @@ public class ClientProxy extends CommonProxy {
         super.init(event);
         getItemModelMesher().register(ItemExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_explosive", "inventory"));
         getItemModelMesher().register(ItemThrowableExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_throwable_explosive", "inventory"));
+        getItemModelMesher().register(ItemSpicyExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_explosive_spicy", "inventory"));
+        getItemModelMesher().register(ItemSpicyThrowableExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_throwable_explosive_spicy", "inventory"));
     }
     
     /**
