@@ -30,10 +30,10 @@ public class ClientProxy extends CommonProxy {
 
     public void init(FMLInitializationEvent event) {
         super.init(event);
-        getItemModelMesher().register(ItemExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_explosive", "inventory"));
-        getItemModelMesher().register(ItemThrowableExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_throwable_explosive", "inventory"));
-        getItemModelMesher().register(ItemSpicyExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_explosive_spicy", "inventory"));
-        getItemModelMesher().register(ItemSpicyThrowableExplosivePotion.instance, 0, new ModelResourceLocation("expotions:potion_throwable_explosive_spicy", "inventory"));
+        getItemModelMesher().register(ItemExplosivePotion.INSTANCE, 0, new ModelResourceLocation("expotions:potion_explosive", "inventory"));
+        getItemModelMesher().register(ItemThrowableExplosivePotion.INSTANCE, 0, new ModelResourceLocation("expotions:potion_throwable_explosive", "inventory"));
+        getItemModelMesher().register(ItemSpicyExplosivePotion.INSTANCE, 0, new ModelResourceLocation("expotions:potion_explosive_spicy", "inventory"));
+        getItemModelMesher().register(ItemSpicyThrowableExplosivePotion.INSTANCE, 0, new ModelResourceLocation("expotions:potion_throwable_explosive_spicy", "inventory"));
     }
     
     /**

@@ -11,6 +11,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderExplosivePotion extends RenderSnowball<EntityExplosivePotion> {
     public RenderExplosivePotion(RenderManager renderManager) {
-        super(renderManager, ItemThrowableExplosivePotion.instance, Minecraft.getMinecraft().getRenderItem());
+        super(renderManager, ItemThrowableExplosivePotion.INSTANCE, Minecraft.getMinecraft().getRenderItem());
     }
 }

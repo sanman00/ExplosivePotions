@@ -4,6 +4,7 @@ import java.util.List;
 import com.comze.sanman00.mods.minecraft.expotions.Main;
 import com.comze.sanman00.mods.minecraft.expotions.entity.EntityExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.tabs.ExplosivePotionsCreativeTab;
+import com.comze.sanman00.mods.minecraft.expotions.util.ItemUtil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -19,7 +20,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 public class ItemThrowableExplosivePotion extends Item {
-    public static final Item instance = new ItemThrowableExplosivePotion();
+    public static final Item INSTANCE = new ItemThrowableExplosivePotion();
 
     private ItemThrowableExplosivePotion() {
         this.setUnlocalizedName("potion_throwable_explosive")
@@ -51,7 +52,7 @@ public class ItemThrowableExplosivePotion extends Item {
         
         if (!world.isRemote) {
             EntityExplosivePotion potion = new EntityExplosivePotion(player.world, player);
-            potion.setStrength(ItemExplosivePotion.getStrength(stack));
+            potion.setStrength(ItemUtil.getStrength(stack));
             potion.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, -20.0F, 0.5F, 1.0F);
             player.world.spawnEntity(potion);
         }
@@ -66,15 +67,15 @@ public class ItemThrowableExplosivePotion extends Item {
     
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        tooltip.add("Strength: " + ItemExplosivePotion.getStrength(stack));
+        tooltip.add("Strength: " + ItemUtil.getStrength(stack));
     }
     
     @Override
     public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        if (tab == ExplosivePotionsCreativeTab.instance && item == ItemThrowableExplosivePotion.instance) {
+        if (tab == ExplosivePotionsCreativeTab.instance && item == ItemThrowableExplosivePotion.INSTANCE) {
             for (int strength = 0;strength <= 10;strength++) {
                 ItemStack stack = new ItemStack(item);
-                ItemExplosivePotion.setStrength(stack, strength);
+                ItemUtil.setStrength(stack, strength);
                 subItems.add(stack);
             }
         }

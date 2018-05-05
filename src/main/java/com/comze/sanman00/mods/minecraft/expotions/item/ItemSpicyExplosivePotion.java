@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.comze.sanman00.mods.minecraft.expotions.Main;
 import com.comze.sanman00.mods.minecraft.expotions.tabs.ExplosivePotionsCreativeTab;
+import com.comze.sanman00.mods.minecraft.expotions.util.ItemUtil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +19,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
 public class ItemSpicyExplosivePotion extends Item {
-    public static final Item instance = new ItemSpicyExplosivePotion();
+    public static final Item INSTANCE = new ItemSpicyExplosivePotion();
 
     private ItemSpicyExplosivePotion() {
         this.setUnlocalizedName("potion_explosive_spicy")
@@ -29,10 +30,10 @@ public class ItemSpicyExplosivePotion extends Item {
     
     @Override
     public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        if (tab == ExplosivePotionsCreativeTab.instance && item == ItemSpicyExplosivePotion.instance) {
+        if (tab == ExplosivePotionsCreativeTab.instance && item == ItemSpicyExplosivePotion.INSTANCE) {
             for (int strength = 0;strength <= 10;strength++) {
                 ItemStack stack = new ItemStack(item);
-                ItemExplosivePotion.setStrength(stack, strength);
+                ItemUtil.setStrength(stack, strength);
                 subItems.add(stack);
             }
         }
@@ -61,7 +62,7 @@ public class ItemSpicyExplosivePotion extends Item {
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entity) {
-        int strength = ItemExplosivePotion.getStrength(stack);
+        int strength = ItemUtil.getStrength(stack);
         world.newExplosion(null, entity.posX, entity.posY, entity.posZ, strength > 0 ? strength * 5.0f : 2.0f, true, true);
         
         if (!(entity instanceof EntityPlayer)) {
@@ -87,6 +88,6 @@ public class ItemSpicyExplosivePotion extends Item {
     
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        tooltip.add("Strength: " + ItemExplosivePotion.getStrength(stack));
+        tooltip.add("Strength: " + ItemUtil.getStrength(stack));
     }
 }

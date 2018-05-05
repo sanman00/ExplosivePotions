@@ -3,7 +3,7 @@ package com.comze.sanman00.mods.minecraft.expotions.brewing;
 import java.util.stream.Stream;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemThrowableExplosivePotion;
-import com.comze.sanman00.mods.minecraft.expotions.util.StackUtil;
+import com.comze.sanman00.mods.minecraft.expotions.util.ItemUtil;
 import com.comze.sanman00.mods.minecraft.expotions.util.WaterBottleOnlyInputBrewingRecipe;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -29,8 +29,8 @@ public final class BrewingManager {
     }
     
     public void registerRecipes() {
-        BrewingRecipeRegistry.addRecipe(new WaterBottleOnlyInputBrewingRecipe(new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)));
-        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Items.GUNPOWDER), new ItemStack(ItemThrowableExplosivePotion.instance)) {
+        BrewingRecipeRegistry.addRecipe(new WaterBottleOnlyInputBrewingRecipe(new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.INSTANCE)));
+        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.INSTANCE), new ItemStack(Items.GUNPOWDER), new ItemStack(ItemThrowableExplosivePotion.INSTANCE)) {
                 @Override
                 public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
                     if (ingredient.getItem() != Items.GUNPOWDER) {
@@ -42,13 +42,13 @@ public final class BrewingManager {
                     return output;
                 }
             });
-        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.instance), new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.instance)) {
+        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.INSTANCE), new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.INSTANCE)) {
             @Override
             public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
                 if (ingredient.getItem() != Item.getItemFromBlock(Blocks.TNT)) {
-                    return null;
+                    return ItemStack.EMPTY;
                 }
-                NBTTagCompound compound = StackUtil.getOrCreateTagCompound(input);
+                NBTTagCompound compound = ItemUtil.getOrCreateTagCompound(input);
                 compound.setBoolean("PotionStrengthCheck", true);
                 return input;
             }
@@ -58,8 +58,8 @@ public final class BrewingManager {
     @SubscribeEvent
     public void onPotionBrewPost(PotionBrewEvent.Post e) {
         Stream.of(e.getItem(0), e.getItem(1), e.getItem(2))
-            .filter(stack -> stack != null && stack.getItem() == ItemExplosivePotion.instance)
-            .map(StackUtil::getOrCreateTagCompound)
+            .filter(stack -> stack != null && stack.getItem() == ItemExplosivePotion.INSTANCE)
+            .map(ItemUtil::getOrCreateTagCompound)
             .filter(compound -> compound.getBoolean("PotionStrengthCheck"))
             .forEach(compound -> {
                 int strength = compound.getInteger("PotionStrength");

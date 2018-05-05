@@ -17,6 +17,6 @@ public class ExplosivePotionsCreativeTab extends CreativeTabs {
 
     @Override
     public ItemStack getTabIconItem() {
-        return new ItemStack(ItemExplosivePotion.instance);
+        return new ItemStack(ItemExplosivePotion.INSTANCE);
     }
 }
