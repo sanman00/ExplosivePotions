@@ -1,5 +1,7 @@
 package com.comze.sanman00.mods.minecraft.expotions.entity;
 
+import com.comze.sanman00.mods.minecraft.expotions.util.ItemUtil;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -52,14 +54,14 @@ public class EntityExplosivePotion extends EntityThrowable {
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
-        compound.setInteger("PotionStrength", this.strength);
-        compound.setBoolean("Spicy", this.spicy);
+        compound.setInteger(ItemUtil.POTION_STRENGTH_TAG_NAME, this.strength);
+        compound.setBoolean(ItemUtil.SPICY_TAG_NAME, this.spicy);
     }
     
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
-        this.strength = compound.getInteger("PotionStrength");
-        this.spicy = compound.getBoolean("Spicy");
+        this.strength = compound.getInteger(ItemUtil.POTION_STRENGTH_TAG_NAME);
+        this.spicy = compound.getBoolean(ItemUtil.SPICY_TAG_NAME);
     }
 }

@@ -1,7 +1,0 @@
-item.potion_explosive.name=Explosive Potion
-item.potion_throwable_explosive.name=Throwable Explosive Potion
-item.potion_explosive_spicy.name=Spicy Explosive Potion
-item.potion_throwable_explosive_spicy.name=Throwable Spicy Explosive Potion
-entity.expotions:ThrowableExplosivePotion.name=Throwable Explosive Potion
-death.attack.ThrowableExplosivePotion=%1$s has been killed by an exploding potion
-itemGroup.explodingPotions=Explosive Potions

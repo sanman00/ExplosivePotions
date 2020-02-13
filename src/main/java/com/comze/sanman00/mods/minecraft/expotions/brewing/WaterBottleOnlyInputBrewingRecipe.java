@@ -1,4 +1,4 @@
-package com.comze.sanman00.mods.minecraft.expotions.util;
+package com.comze.sanman00.mods.minecraft.expotions.brewing;
 
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
@@ -7,7 +7,7 @@ import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 
 /**
- * A {@link BrewingRecipe} implementation that requires the input of the recipe to be water bottles.
+ * A {@link BrewingRecipe} implementation that requires the input of the recipe to be a water bottle.
  *
  */
 public class WaterBottleOnlyInputBrewingRecipe extends BrewingRecipe {

@@ -24,20 +24,14 @@ public class ItemExplosivePotion extends Item {
         this.setUnlocalizedName("potion_explosive")
             .setRegistryName(Main.MOD_ID, "potion_explosive")
             .setMaxStackSize(1)
-            .setCreativeTab(ExplosivePotionsCreativeTab.instance);
+            .setCreativeTab(ExplosivePotionsCreativeTab.INSTANCE);
     }
 
     @Override
     public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        if (tab == ExplosivePotionsCreativeTab.instance && item == ItemExplosivePotion.INSTANCE) {
-            for (int strength = 0;strength <= 10;strength++) {
-                ItemStack stack = new ItemStack(item);
-                ItemUtil.setStrength(stack, strength);
-                subItems.add(stack);
-            }
-        }
+        ItemUtil.addItemVariants(item, ItemExplosivePotion.INSTANCE, tab, ExplosivePotionsCreativeTab.INSTANCE, subItems);
     }
-    
+
     @Override
     public boolean showDurabilityBar(ItemStack stack) {
         return false;

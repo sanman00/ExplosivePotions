@@ -26,7 +26,7 @@ public class ItemThrowableExplosivePotion extends Item {
         this.setUnlocalizedName("potion_throwable_explosive")
             .setRegistryName(Main.MOD_ID, "potion_throwable_explosive")
             .setMaxStackSize(1)
-            .setCreativeTab(ExplosivePotionsCreativeTab.instance);
+            .setCreativeTab(ExplosivePotionsCreativeTab.INSTANCE);
     }
 
     @Override
@@ -72,12 +72,6 @@ public class ItemThrowableExplosivePotion extends Item {
     
     @Override
     public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        if (tab == ExplosivePotionsCreativeTab.instance && item == ItemThrowableExplosivePotion.INSTANCE) {
-            for (int strength = 0;strength <= 10;strength++) {
-                ItemStack stack = new ItemStack(item);
-                ItemUtil.setStrength(stack, strength);
-                subItems.add(stack);
-            }
-        }
+        ItemUtil.addItemVariants(item, ItemThrowableExplosivePotion.INSTANCE, tab, ExplosivePotionsCreativeTab.INSTANCE, subItems);
     }
 }

@@ -2,9 +2,11 @@ package com.comze.sanman00.mods.minecraft.expotions.brewing;
 
 import java.util.stream.Stream;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemExplosivePotion;
+import com.comze.sanman00.mods.minecraft.expotions.item.ItemSpicyExplosivePotion;
+import com.comze.sanman00.mods.minecraft.expotions.item.ItemSpicyThrowableExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemThrowableExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.util.ItemUtil;
-import com.comze.sanman00.mods.minecraft.expotions.util.WaterBottleOnlyInputBrewingRecipe;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -25,53 +27,95 @@ public final class BrewingManager {
     
     public void init() {
         registerRecipes();
-        registerEventHandlers();
+        MinecraftForge.EVENT_BUS.register(this);
     }
     
     public void registerRecipes() {
         BrewingRecipeRegistry.addRecipe(new WaterBottleOnlyInputBrewingRecipe(new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.INSTANCE)));
         BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.INSTANCE), new ItemStack(Items.GUNPOWDER), new ItemStack(ItemThrowableExplosivePotion.INSTANCE)) {
-                @Override
-                public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
-                    if (ingredient.getItem() != Items.GUNPOWDER) {
-                        return null;
-                    }
-                    ItemStack output = getOutput();
-                    int strength = ItemExplosivePotion.getStrength(input);
-                    ItemExplosivePotion.setStrength(output, strength);
-                    return output;
+            @Override
+            public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
+                ItemStack output = super.getOutput(input, ingredient);
+                if (output != ItemStack.EMPTY) {
+                    int strength = ItemUtil.getStrength(input);
+                    ItemUtil.setStrength(output, strength);
                 }
-            });
+                return output;
+            }
+        });
         BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.INSTANCE), new ItemStack(Blocks.TNT), new ItemStack(ItemExplosivePotion.INSTANCE)) {
             @Override
             public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
-                if (ingredient.getItem() != Item.getItemFromBlock(Blocks.TNT)) {
+                if (ItemUtil.getStrength(input) >= ItemUtil.MAX_STRENGTH || ingredient.getItem() != Item.getItemFromBlock(Blocks.TNT)) {
                     return ItemStack.EMPTY;
                 }
                 NBTTagCompound compound = ItemUtil.getOrCreateTagCompound(input);
-                compound.setBoolean("PotionStrengthCheck", true);
+                compound.setBoolean(ItemUtil.POTION_STRENGTH_CHECK_TAG_NAME, true);
                 return input;
             }
         });
+        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemExplosivePotion.INSTANCE), new ItemStack(Items.BLAZE_POWDER), new ItemStack(ItemSpicyExplosivePotion.INSTANCE)) {
+            @Override
+            public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
+                if (ingredient.getItem() != Items.BLAZE_POWDER) {
+                    return ItemStack.EMPTY;
+                }
+                ItemStack output = super.getOutput(input, ingredient);
+                int strength = ItemUtil.getStrength(input);
+                System.out.println(strength);
+                System.out.println(input.getTagCompound());
+                System.out.println(input);
+                ItemUtil.setStrength(output, strength);
+                
+                return output;
+            }
+        });
+        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemSpicyExplosivePotion.INSTANCE), new ItemStack(Items.GUNPOWDER), new ItemStack(ItemSpicyThrowableExplosivePotion.INSTANCE)) {
+            @Override
+            public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
+                if (ingredient.getItem() != Items.GUNPOWDER) {
+                    return ItemStack.EMPTY;
+                }
+                ItemStack output = super.getOutput(input, ingredient);
+                int strength = ItemUtil.getStrength(input);
+                ItemUtil.setStrength(output, strength);
+                
+                return output;
+            }
+        });
+        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(new ItemStack(ItemSpicyExplosivePotion.INSTANCE), new ItemStack(Blocks.TNT), new ItemStack(ItemSpicyExplosivePotion.INSTANCE)) {
+            @Override
+            public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
+                if (ItemUtil.getStrength(input) >= ItemUtil.MAX_STRENGTH || ingredient.getItem() != Item.getItemFromBlock(Blocks.TNT)) {
+                    return ItemStack.EMPTY;
+                }
+                NBTTagCompound compound = ItemUtil.getOrCreateTagCompound(input);
+                compound.setBoolean(ItemUtil.POTION_STRENGTH_CHECK_TAG_NAME, true);
+                return input;
+            }
+        });
+        /*BrewingRecipeRegistry.addRecipe(new InitialPotionBrewingRecipe());
+        BrewingRecipeRegistry.addRecipe(new ConvertPotionBrewingRecipe(new ItemStack(ItemExplosivePotion.INSTANCE), new ItemStack(ItemThrowableExplosivePotion.INSTANCE), new ItemStack(Items.GUNPOWDER)));
+        BrewingRecipeRegistry.addRecipe(new UpgradeStrengthBrewingRecipe(new ItemStack(ItemExplosivePotion.INSTANCE)));
+        BrewingRecipeRegistry.addRecipe(new ConvertPotionBrewingRecipe(new ItemStack(ItemExplosivePotion.INSTANCE), new ItemStack(ItemSpicyExplosivePotion.INSTANCE), new ItemStack(Items.BLAZE_POWDER)));
+        BrewingRecipeRegistry.addRecipe(new ConvertPotionBrewingRecipe(new ItemStack(ItemSpicyExplosivePotion.INSTANCE), new ItemStack(ItemSpicyThrowableExplosivePotion.INSTANCE), new ItemStack(Items.GUNPOWDER)));
+        BrewingRecipeRegistry.addRecipe(new UpgradeStrengthBrewingRecipe(new ItemStack(ItemSpicyExplosivePotion.INSTANCE)));*/
     }
     
     @SubscribeEvent
     public void onPotionBrewPost(PotionBrewEvent.Post e) {
         Stream.of(e.getItem(0), e.getItem(1), e.getItem(2))
-            .filter(stack -> stack != null && stack.getItem() == ItemExplosivePotion.INSTANCE)
+            .filter(stack -> stack != null)
+            .filter(stack -> stack.getItem() == ItemExplosivePotion.INSTANCE || stack.getItem() == ItemSpicyExplosivePotion.INSTANCE)
+            //.filter(stack -> e.getItem(3).getItem() == Item.getItemFromBlock(Blocks.TNT))
             .map(ItemUtil::getOrCreateTagCompound)
-            .filter(compound -> compound.getBoolean("PotionStrengthCheck"))
             .forEach(compound -> {
-                int strength = compound.getInteger("PotionStrength");
+                int strength = Math.max(1, compound.getInteger(ItemUtil.POTION_STRENGTH_TAG_NAME));
                 
-                if (strength < 10) {
-                    compound.setInteger("PotionStrength", strength + 1);
+                if (strength < ItemUtil.MAX_STRENGTH && compound.getBoolean(ItemUtil.POTION_STRENGTH_CHECK_TAG_NAME)) {
+                    compound.setInteger(ItemUtil.POTION_STRENGTH_TAG_NAME, strength + 1);
+                    compound.removeTag(ItemUtil.POTION_STRENGTH_CHECK_TAG_NAME);
                 }
-                compound.removeTag("PotionStrengthCheck");
             });
-    }
-    
-    public void registerEventHandlers() {
-        MinecraftForge.EVENT_BUS.register(this);
     }
 }

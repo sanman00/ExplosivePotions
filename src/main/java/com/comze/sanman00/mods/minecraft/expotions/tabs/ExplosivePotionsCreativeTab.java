@@ -5,7 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
 public class ExplosivePotionsCreativeTab extends CreativeTabs {
-    public static final ExplosivePotionsCreativeTab instance = new ExplosivePotionsCreativeTab();
+    public static final ExplosivePotionsCreativeTab INSTANCE = new ExplosivePotionsCreativeTab();
 
     private ExplosivePotionsCreativeTab() {
         super("explodingPotions");
