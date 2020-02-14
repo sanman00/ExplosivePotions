@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 public class EntityExplosivePotion extends EntityThrowable {
     private int strength;
-    private boolean spicy;
+    protected boolean spicy;
     
     public EntityExplosivePotion(World worldIn) {
         super(worldIn);
@@ -45,7 +45,7 @@ public class EntityExplosivePotion extends EntityThrowable {
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote && result != null && result.getBlockPos() != null) {
             BlockPos pos = result.getBlockPos();
-            this.world.newExplosion(this, pos.getX(), pos.getY(), pos.getZ(), Math.max(2.0f, Math.min(10, this.strength) * 5.0f), this.spicy, true); //prevent explosion strength from being too high
+            this.world.newExplosion(this, pos.getX(), pos.getY(), pos.getZ(), Math.max(2.0f, this.strength * 5.0f), this.spicy, true);
             this.world.playBroadcastSound(2002, new BlockPos(this), 1);
             this.setDead();
         }

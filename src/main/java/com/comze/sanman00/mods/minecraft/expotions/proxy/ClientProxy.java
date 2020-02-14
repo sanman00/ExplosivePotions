@@ -1,11 +1,13 @@
 package com.comze.sanman00.mods.minecraft.expotions.proxy;
 
 import com.comze.sanman00.mods.minecraft.expotions.entity.EntityExplosivePotion;
+import com.comze.sanman00.mods.minecraft.expotions.entity.EntitySpicyExplosivePotion;
+import com.comze.sanman00.mods.minecraft.expotions.entity.render.RenderExplosivePotion;
+import com.comze.sanman00.mods.minecraft.expotions.entity.render.RenderSpicyExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemSpicyExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemSpicyThrowableExplosivePotion;
 import com.comze.sanman00.mods.minecraft.expotions.item.ItemThrowableExplosivePotion;
-import com.comze.sanman00.mods.minecraft.expotions.client.render.RenderExplosivePotion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.RenderItem;
@@ -26,6 +28,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
         RenderingRegistry.registerEntityRenderingHandler(EntityExplosivePotion.class, RenderExplosivePotion::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntitySpicyExplosivePotion.class, RenderSpicyExplosivePotion::new);
     }
 
     public void init(FMLInitializationEvent event) {
