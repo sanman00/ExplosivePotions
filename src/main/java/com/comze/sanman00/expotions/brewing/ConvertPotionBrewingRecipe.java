@@ -1,12 +1,13 @@
-package com.comze.sanman00.mods.minecraft.expotions.brewing;
+package com.comze.sanman00.expotions.brewing;
 
-import com.comze.sanman00.mods.minecraft.expotions.util.ItemUtil;
+import com.comze.sanman00.expotions.util.ItemUtil;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 
 public class ConvertPotionBrewingRecipe extends BrewingRecipe {
-    public ConvertPotionBrewingRecipe(ItemStack input, ItemStack ingredient, ItemStack output) {
+    public ConvertPotionBrewingRecipe(Ingredient input, Ingredient ingredient, ItemStack output) {
         super(input, ingredient, output);
     }
 

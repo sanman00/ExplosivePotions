@@ -1,6 +1,0 @@
-{
-    "parent": "item/generated", 
-	"textures": {
-        "layer0": "expotions:items/potion_throwable_explosive_spicy"
-    }
-}

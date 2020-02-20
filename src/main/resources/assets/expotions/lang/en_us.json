@@ -1,0 +1,10 @@
+{
+    "item.expotions.potion_explosive" : "Explosive Potion",
+    "item.expotions.potion_explosive_throwable" : "Throwable Explosive Potion",
+    "item.expotions.potion_explosive_spicy" : "Spicy Explosive Potion",
+    "item.expotions.potion_explosive_throwable_spicy" : "Throwable Spicy Explosive Potion",
+    "entity.expotions:potion_explosive_throwable" : "Throwable Explosive Potion",
+    "death.attack.potion_explosive_throwable" : "%1$s has been killed by an exploding potion",
+    "itemGroup.expotions" : "Explosive Potions", 
+    "tooltip.expotions.strength" : "Strength: %1$s"
+}
