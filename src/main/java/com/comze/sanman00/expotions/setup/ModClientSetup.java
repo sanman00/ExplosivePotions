@@ -1,9 +1,9 @@
-package com.comze.sanman00.expotions.proxy;
+package com.comze.sanman00.expotions.setup;
 
 import com.comze.sanman00.expotions.Main;
 import com.comze.sanman00.expotions.entity.EntityExplosivePotion;
+
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,17 +17,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
  * cannot be loaded include models, etc.
  */
 @EventBusSubscriber(modid = Main.MOD_ID, value = {Dist.CLIENT}, bus = EventBusSubscriber.Bus.MOD)
-public class ClientProxy {
+class ModClientSetup {
     @SubscribeEvent
-    public static void init(FMLClientSetupEvent event) {
+    static void setupClient(FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(EntityExplosivePotion.class, m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
-    }
-    
-    /**
-     * Convenience function for getting the {@code ItemModelMesher}.
-     * @return The {@code ItemModelMesher} from {@link RenderItem#getItemModelMesher()} via {@link Minecraft#getItemRenderer()}
-     */
-    public static ItemModelMesher getItemModelMesher() {
-        return Minecraft.getInstance().getItemRenderer().getItemModelMesher();
     }
 }

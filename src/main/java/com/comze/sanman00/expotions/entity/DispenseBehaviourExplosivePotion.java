@@ -1,11 +1,10 @@
 package com.comze.sanman00.expotions.entity;
 
-import net.minecraft.dispenser.ProjectileDispenseBehavior;
-
 import com.comze.sanman00.expotions.item.ModItems;
 import com.comze.sanman00.expotions.util.ItemUtil;
 
 import net.minecraft.dispenser.IPosition;
+import net.minecraft.dispenser.ProjectileDispenseBehavior;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

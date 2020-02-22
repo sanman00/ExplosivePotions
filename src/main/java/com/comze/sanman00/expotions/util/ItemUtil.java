@@ -5,23 +5,26 @@ import java.util.Random;
 
 import com.comze.sanman00.expotions.entity.EntityExplosivePotion;
 
-import net.minecraft.item.ItemGroup;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.stats.Stats;
 //import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
@@ -77,8 +80,9 @@ public class ItemUtil {
     public static ActionResult<ItemStack> throwPotion(Item item, Random rand, World world, PlayerEntity player, Hand hand, boolean spicy) {
         ItemStack originalStack = player.getHeldItem(hand);
         ItemStack stack = player.abilities.isCreativeMode ? originalStack.copy() : originalStack.split(1);
-        world.playSound(null, player.getPosition(), SoundEvents.ENTITY_SPLASH_POTION_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (rand.nextFloat() * 0.4F + 0.8F));
         
+        world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_SPLASH_POTION_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (rand.nextFloat() * 0.4F + 0.8F));
+
         if (!world.isRemote) {
             EntityExplosivePotion potion = new EntityExplosivePotion(player, world);
             potion.setStrength(getStrength(stack));
@@ -86,8 +90,9 @@ public class ItemUtil {
             potion.shoot(player, player.rotationPitch, player.rotationYaw, -20.0F, 0.5F, 1.0F);
             world.addEntity(potion);
         }
-        //player.addStat(StatList.getObjectUseStats(item));
-        return new ActionResult<>(ActionResultType.SUCCESS, stack);
+        player.addStat(Stats.ITEM_USED.get(item));
+        
+        return new ActionResult<>(ActionResultType.SUCCESS, originalStack);
     }
 
     public static ItemStack usePotion(ItemStack stack, World world, LivingEntity entity, boolean spicy) {
@@ -96,10 +101,16 @@ public class ItemUtil {
         
         if (entity instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) entity;
+            
+            if (player instanceof ServerPlayerEntity) {
+                CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
+            }
+            player.addStat(Stats.ITEM_USED.get(stack.getItem()));
+            
             if (!player.abilities.isCreativeMode) {
                 stack.shrink(1);
         
-                if (stack.getCount() <= 0) {
+                if (stack.isEmpty()) {
                     return new ItemStack(Items.GLASS_BOTTLE);
                 }
                 player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
@@ -111,5 +122,10 @@ public class ItemUtil {
 
     public static void addTooltip(ItemStack stack, List<ITextComponent> tooltip) {
         tooltip.add(new TranslationTextComponent("tooltip.expotions.strength", getStrength(stack)).applyTextStyle(TextFormatting.GRAY));
+    }
+
+    public static ActionResult<ItemStack> onItemRightClick(PlayerEntity player, Hand hand) {
+        player.setActiveHand(hand);
+        return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
     }
 }

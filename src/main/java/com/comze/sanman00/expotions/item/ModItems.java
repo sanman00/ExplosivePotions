@@ -1,6 +1,9 @@
 package com.comze.sanman00.expotions.item;
 
-import static com.comze.sanman00.expotions.util.ModUtil.*;
+import static com.comze.sanman00.expotions.util.ModUtil.EXPLOSIVE_POTION_NAME;
+import static com.comze.sanman00.expotions.util.ModUtil.SPICY_EXPLOSIVE_POTION_NAME;
+import static com.comze.sanman00.expotions.util.ModUtil.SPICY_THROWABLE_EXPLOSIVE_POTION_NAME;
+import static com.comze.sanman00.expotions.util.ModUtil.THROWABLE_EXPLOSIVE_POTION_NAME;
 
 import com.comze.sanman00.expotions.Main;
 

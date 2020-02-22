@@ -1,6 +1,6 @@
 package com.comze.sanman00.expotions.entity;
 
-import static com.comze.sanman00.expotions.util.ModUtil.*;
+import static com.comze.sanman00.expotions.util.ModUtil.THROWABLE_EXPLOSIVE_POTION_NAME;
 
 import com.comze.sanman00.expotions.Main;
 

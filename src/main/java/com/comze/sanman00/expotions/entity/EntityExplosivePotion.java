@@ -20,8 +20,14 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+@OnlyIn(
+    value = Dist.CLIENT,
+    _interface = IRendersAsItem.class
+)
 @SuppressWarnings("unchecked")
 public class EntityExplosivePotion extends ThrowableEntity implements IRendersAsItem {
     public static final DataParameter<Integer> STRENGTH = EntityDataManager.createKey(EntityExplosivePotion.class, DataSerializers.VARINT);

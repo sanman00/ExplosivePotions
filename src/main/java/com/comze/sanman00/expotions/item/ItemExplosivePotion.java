@@ -2,20 +2,17 @@ package com.comze.sanman00.expotions.item;
 
 import java.util.List;
 
-import com.comze.sanman00.expotions.Main;
 import com.comze.sanman00.expotions.tabs.ExplosivePotionsCreativeTab;
 import com.comze.sanman00.expotions.util.ItemUtil;
-import com.comze.sanman00.expotions.util.ModUtil;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.UseAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
@@ -24,14 +21,11 @@ import net.minecraft.world.World;
 public class ItemExplosivePotion extends Item {
     public ItemExplosivePotion() {
         super(new Item.Properties().maxStackSize(1).group(ExplosivePotionsCreativeTab.INSTANCE));
-       // EffectInstance i;
-       // this.setUnlocalizedName("potion_explosive")
-       this.setRegistryName(Main.MOD_ID, ModUtil.EXPLOSIVE_POTION_NAME);
     }
 
     @Override
     public void fillItemGroup(ItemGroup tab, NonNullList<ItemStack> subItems) {
-        ItemUtil.addItemVariants(ModItems.EXPLOSIVE_POTION, tab, ExplosivePotionsCreativeTab.INSTANCE, subItems);
+        ItemUtil.addItemVariants(this, tab, ExplosivePotionsCreativeTab.INSTANCE, subItems);
     }
 
     @Override
@@ -51,8 +45,7 @@ public class ItemExplosivePotion extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-        player.setActiveHand(hand);
-        return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
+        return ItemUtil.onItemRightClick(player, hand);
     }
 
     @Override
