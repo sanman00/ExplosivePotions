@@ -39,7 +39,7 @@ public final class BrewingManager {
         Stream.of(e.getItem(0), e.getItem(1), e.getItem(2))
         .filter(stack -> stack.getItem() == ModItems.EXPLOSIVE_POTION || stack.getItem() == ModItems.SPICY_EXPLOSIVE_POTION)
         //.filter(stack -> e.getItem(3).getItem() == Items.TNT) 
-        .map(ItemUtil::getOrCreateTagCompound)
+        .map(ItemUtil::getOrCreateTag)
         .forEach(compound -> {
             int strength = Math.max(1, compound.getInt(ItemUtil.POTION_STRENGTH_TAG_NAME));
             

@@ -15,9 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.stats.Stats;
-//import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
@@ -35,7 +33,7 @@ public class ItemUtil {
     public static final String POTION_STRENGTH_CHECK_TAG_NAME = "PotionStrengthCheck";
     public static final String SPICY_TAG_NAME = "Spicy";
     
-    public static CompoundNBT getOrCreateTagCompound(ItemStack stack, boolean create) {
+    public static CompoundNBT getOrCreateTag(ItemStack stack, boolean create) {
         if (!stack.hasTag() && create) {
             stack.setTag(new CompoundNBT());
         }
@@ -43,8 +41,8 @@ public class ItemUtil {
         return stack.getTag();
     }
     
-    public static CompoundNBT getOrCreateTagCompound(ItemStack stack) {
-        return getOrCreateTagCompound(stack, true);
+    public static CompoundNBT getOrCreateTag(ItemStack stack) {
+        return getOrCreateTag(stack, true);
     }
     
     /**
@@ -54,7 +52,7 @@ public class ItemUtil {
      * @return The strength of this potion
      */
     public static int getStrength(ItemStack stack) {
-        return Math.max(MIN_STRENGTH, getOrCreateTagCompound(stack).getInt(POTION_STRENGTH_TAG_NAME));
+        return Math.max(MIN_STRENGTH, getOrCreateTag(stack).getInt(POTION_STRENGTH_TAG_NAME));
     }
     
     /**
@@ -64,7 +62,7 @@ public class ItemUtil {
      * @param strength The strength that is to be set onto this potion
      */
     public static void setStrength(ItemStack stack, int strength) {
-        getOrCreateTagCompound(stack).putInt(POTION_STRENGTH_TAG_NAME, strength);
+        getOrCreateTag(stack).putInt(POTION_STRENGTH_TAG_NAME, strength);
     }
     
     public static void addItemVariants(Item item, ItemGroup tab, ItemGroup expectedTab, NonNullList<ItemStack> subItems) {
@@ -81,7 +79,7 @@ public class ItemUtil {
         ItemStack originalStack = player.getHeldItem(hand);
         ItemStack stack = player.abilities.isCreativeMode ? originalStack.copy() : originalStack.split(1);
         
-        world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_SPLASH_POTION_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (rand.nextFloat() * 0.4F + 0.8F));
+        world.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_SPLASH_POTION_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (rand.nextFloat() * 0.4F + 0.8F));
 
         if (!world.isRemote) {
             EntityExplosivePotion potion = new EntityExplosivePotion(player, world);
@@ -92,12 +90,12 @@ public class ItemUtil {
         }
         player.addStat(Stats.ITEM_USED.get(item));
         
-        return new ActionResult<>(ActionResultType.SUCCESS, originalStack);
+        return ActionResult.resultSuccess(originalStack);
     }
 
     public static ItemStack usePotion(ItemStack stack, World world, LivingEntity entity, boolean spicy) {
         int strength = getStrength(stack);
-        world.createExplosion(null, entity.posX, entity.posY, entity.posZ, Math.max(2.0f, strength * 5.0f), spicy, Explosion.Mode.BREAK/*,  true*/);
+        world.createExplosion(null, entity.getPosX(), entity.getPosY(), entity.getPosZ(), Math.max(2.0f, strength * 5.0f), spicy, Explosion.Mode.BREAK/*,  true*/);
         
         if (entity instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) entity;
@@ -126,6 +124,6 @@ public class ItemUtil {
 
     public static ActionResult<ItemStack> onItemRightClick(PlayerEntity player, Hand hand) {
         player.setActiveHand(hand);
-        return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
+        return ActionResult.resultSuccess(player.getHeldItem(hand));
     }
 }

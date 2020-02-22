@@ -28,7 +28,6 @@ import net.minecraftforge.fml.network.NetworkHooks;
     value = Dist.CLIENT,
     _interface = IRendersAsItem.class
 )
-@SuppressWarnings("unchecked")
 public class EntityExplosivePotion extends ThrowableEntity implements IRendersAsItem {
     public static final DataParameter<Integer> STRENGTH = EntityDataManager.createKey(EntityExplosivePotion.class, DataSerializers.VARINT);
     public static final DataParameter<Boolean> SPICY = EntityDataManager.createKey(EntityExplosivePotion.class, DataSerializers.BOOLEAN);
@@ -38,11 +37,11 @@ public class EntityExplosivePotion extends ThrowableEntity implements IRendersAs
     }
 
     public EntityExplosivePotion(double x, double y, double z, World worldIn) {
-        super((EntityType<? extends ThrowableEntity>) ModEntities.THROWABLE_EXPLOSIVE_POTION, x, y, z, worldIn);
+        super(ModEntities.THROWABLE_EXPLOSIVE_POTION, x, y, z, worldIn);
     }
      
     public EntityExplosivePotion(LivingEntity livingEntity, World world) {
-        super((EntityType<? extends ThrowableEntity>) ModEntities.THROWABLE_EXPLOSIVE_POTION, livingEntity, world);
+        super(ModEntities.THROWABLE_EXPLOSIVE_POTION, livingEntity, world);
     }
 
     public void setStrength(int strength) {

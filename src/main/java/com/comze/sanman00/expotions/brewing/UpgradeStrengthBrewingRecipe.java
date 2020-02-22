@@ -18,7 +18,7 @@ public class UpgradeStrengthBrewingRecipe extends BrewingRecipe {
         if (ItemUtil.getStrength(input) >= ItemUtil.MAX_STRENGTH || ingredient.getItem() != Items.TNT) {
             return ItemStack.EMPTY;
         }
-        CompoundNBT compound = ItemUtil.getOrCreateTagCompound(input);
+        CompoundNBT compound = ItemUtil.getOrCreateTag(input);
         compound.putBoolean(ItemUtil.POTION_STRENGTH_CHECK_TAG_NAME, true);
         return input;
     }

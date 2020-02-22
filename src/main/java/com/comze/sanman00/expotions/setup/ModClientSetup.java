@@ -1,7 +1,7 @@
 package com.comze.sanman00.expotions.setup;
 
 import com.comze.sanman00.expotions.Main;
-import com.comze.sanman00.expotions.entity.EntityExplosivePotion;
+import com.comze.sanman00.expotions.entity.ModEntities;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
@@ -20,6 +20,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 class ModClientSetup {
     @SubscribeEvent
     static void setupClient(FMLClientSetupEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(EntityExplosivePotion.class, m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.THROWABLE_EXPLOSIVE_POTION, m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
     }
 }
